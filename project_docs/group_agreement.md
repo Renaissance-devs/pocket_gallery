@@ -43,6 +43,7 @@ For any conflict that cannot be resolved according to these guidelines, we will 
  - Multiple team members are not to work separately on any one branch, task, or feature. 
  - No team member should work on a task, branch, or feature that is not one of their direct assigns.  
  - Deadlines are 7:59am the next day, unless otherwise specified within Trello or altered by group agreement. 
+ - After Hours: We agree to each put in a minimum of 2 hours after class to further the project.
  - We will all pull from the master branch each morning, as a group, and after all outstanding pull requests have been assimilated.  
 
 **Communication:**
