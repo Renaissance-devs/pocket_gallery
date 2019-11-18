@@ -46,9 +46,11 @@ function Art(info) {
   this.image_url = info.imageLinks
     ? info.imageLinks.thumbnail.replace(httpRegex, 'https://')
     : placeholderImage;
-  this.description = info.description
-    ? info.description
-    : 'No description available';
+  this.details = info.details ? info.details : 'No details available';
+  this.gallery = info.gallery
+    ? info.gallery
+    : 'No gallery information available';
+  this.century = info.century ? info.century : "We don't have this information";
 }
 
 const client = new pg.Client(process.env.DATABASE_URL);
