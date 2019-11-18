@@ -1,7 +1,7 @@
 # Pocket Gallery
 ***
 ## Group Members
-- Holly David - https://github.com/hollydavis541
+- Holly Davis - https://github.com/hollydavis541
 - Lindsay Peltier -https://github.com/LindsayPeltier
 - Travis Skyles - https://github.com/tskyles
 - David Vloedman - https://github.com/david-vloedman
