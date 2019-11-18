@@ -1,4 +1,7 @@
 // This is where we will write callback functions for routes
+function search(request, response){
+  response.render('searches')
+}
 
 
 
