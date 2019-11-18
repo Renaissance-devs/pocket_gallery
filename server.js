@@ -55,31 +55,23 @@ function Art(info) {
     : 'We do not have this information';
 }
 
-CREATE TABLE works (
-  id SERIAL PRIMARY KEY,
-  artist VARCHAR(255),
-  title VARCHAR(255),
-  image_url VARCHAR(255),
-  gallery VARCHAR(255)
-);
-
 //Inserts the selected art work into the database.
 //After the data is inserted, it should render the work with /work/:id
 app.post('/works', createWork);
 
 function createWork(request, response) {
-  let { artist, title, image_url, gallery, century} = request.body;
+  let { artist, title, image_url, gallery, century } = request.body;
   let SQL =
     'INSERT INTO works(artist, title, image_url, gallery, century) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
   let values = [artist, title, image_url, gallery, century];
 
-  return client.query(SQL, values)
+  return client
+    .query(SQL, values)
     .then(result => {
-      response.redirect(`/work/${result.rows[0].id}`); 
+      response.redirect(`/work/${result.rows[0].id}`);
     })
     .catch(error => handleError(error, response));
 }
-
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
