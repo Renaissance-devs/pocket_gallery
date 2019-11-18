@@ -21,6 +21,9 @@ app.use(express.urlencoded({
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+
+app.get('/', getIndex);
+
 app.use(methodOverride((request, response) => {
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
     // look in urlencoded POST bodies and delete it
@@ -29,6 +32,11 @@ app.use(methodOverride((request, response) => {
     return method;
   }
 }));
+
+
+function getIndex(request, response) {
+  response.render('pages/index');
+}
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
