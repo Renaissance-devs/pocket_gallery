@@ -23,6 +23,8 @@ This project utilizes the Harvard Art Mueseums API https://github.com/harvardart
 
 ## User Stories
 https://github.com/Renaissance-devs/pocket_gallery/blob/master/project_docs/user_stories.md
+### MVPs
+https://docs.google.com/document/d/1GI_ycft2kEVggTB85nXQ73HPVkbyn3MzfyVAP73coe0/edit#heading=h.25wze2i1pvha
 
 ## Group Agreement
 https://github.com/Renaissance-devs/pocket_gallery/blob/master/project_docs/group_agreement.md
