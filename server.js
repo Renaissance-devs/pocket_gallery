@@ -70,10 +70,12 @@ function search(request, response){
 }
 
 function searchResults(request, response) {
-  let url = `https://api.harvardartmuseums.org/object?q=monet&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
-  // if (request.body.search[1] === 'title') { url += `+intitle:${request.body.search[0]}`; }
-  // if (request.body.search[1] === 'artist') { url += `+inauthor:${request.body.search[0]}`; }
-  // if (request.body.search[1] === 'artist') { url += `+inauthor:${request.body.search[0]}`; }
+  let param = 'keyword';
+  if (request.body.search[1] === 'title') { param = 'title'; }
+  if (request.body.search[1] === 'artist') { param = 'person' }
+  if (request.body.search[1] === 'color') { param = 'color'; }
+  let url = `https://api.harvardartmuseums.org/object?q=${param}=${request.body.search[0]}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
+
   console.log(url);
   superagent.get(url)
     .then(results => {
