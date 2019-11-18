@@ -1,0 +1,27 @@
+{
+  "name": "pocket_gallery",
+  "version": "1.0.0",
+  "description": "*** ## Group Members - Holly David - https://github.com/hollydavis541 - Lindsay Peltier -https://github.com/LindsayPeltier - Travis Skyles - https://github.com/tskyles - David Vloedman - https://github.com/david-vloedman *** ## Overview Pocket gallery is a web application that utilizes the Havard Art Museum API. Users can search for works by title or artist. Users can also create their own galleries to which they can save specific pieces to that are returned from the API. Users can update a work and it's details as well as which gallery it belongs to.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Renaissance-devs/pocket_gallery.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Renaissance-devs/pocket_gallery/issues"
+  },
+  "homepage": "https://github.com/Renaissance-devs/pocket_gallery#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^2.7.2",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "pg": "^7.12.1",
+    "superagent": "^5.1.0"
+  }
+}
