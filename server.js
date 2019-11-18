@@ -26,3 +26,10 @@ app.use(methodOverride((request, response) => {
     return method;
   }
 }));
+
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('err', err => console.error(err));
+
+
+app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
