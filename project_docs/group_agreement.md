@@ -32,7 +32,7 @@ Because our team consists of 4 members, it is possible that a majority consensus
 For any conflict that cannot be resolved according to these guidelines, we will involve an instructor to mediate as a method of last resort. 
 
 **Workflow:** 
- - We will maintain a single repo through GitHub : 201_Final_Project.
+ - We will maintain a single repo through GitHub : github.com/Renaissance-devs/pocket_gallery
  - All team members act as equal contributors, and will clone the initial master branch with approved scaffolding to their individual local repositories.
  - MVPS will be decomposed into coding and project oriented tasks, which will be individually assigned through Trello. 
  - Each developer will create a new feature branch titled appropriately and distinctly to the task. Branch names will all be lowercase with no spaces (use _ for any spaces).
@@ -53,5 +53,5 @@ We will conclude with a reflection meeting and a final update of our Trello boar
 We will participate in daily standups with Instructors. 
 
 **Technology and Tools:**
-The Github repository will be initialized by David, with Mason, Natalie, Lindsay added as collaborators.
-We will deploy our web app through Netlify 
+The Github repository will be initialized by David, with Holly, Travis and Lindsay added as collaborators.
+We will deploy our web app through Heroku
