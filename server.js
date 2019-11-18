@@ -23,6 +23,9 @@ app.use(
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+
+app.get('/', getIndex);
+
 app.use(methodOverride((request, response) => {
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
     // look in urlencoded POST bodies and delete it
@@ -32,6 +35,11 @@ app.use(methodOverride((request, response) => {
   }
 }));
 
+
+
+function getIndex(request, response) {
+  response.render('pages/index');
+}
 //BOOK CONSTRUCTOR
 
 function Art(info) {
