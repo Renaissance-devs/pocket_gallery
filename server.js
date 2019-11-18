@@ -8,7 +8,7 @@ require('dotenv').config();
 const methodOverride = require('method-override');
 
 // Imported Functions
-const searchResults = require('./server_modules/routeHandlers');
+// const routeHandlers = require('./server_modules/routeHandlers');
 
 // Application Setup
 const app = express();
@@ -43,7 +43,34 @@ client.connect();
 client.on('err', err => console.error(err));
 
 // Routes
-app.post('/searches', searchResults);
+app.get('/searches', search);
+app.post('/searches/results', searchResults);
+
+// Callback Functions
+function search(request, response){
+  response.render('searches')
+}
+
+function searchResults(request, response) {
+  let url = `https://api.harvardartmuseums.org/object?q=monet&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
+  // if (request.body.search[1] === 'title') { url += `+intitle:${request.body.search[0]}`; }
+  // if (request.body.search[1] === 'artist') { url += `+inauthor:${request.body.search[0]}`; }
+  // if (request.body.search[1] === 'artist') { url += `+inauthor:${request.body.search[0]}`; }
+  console.log(url);
+  superagent.get(url)
+    .then(results => {
+      results.body.records.forEach(el => {
+        console.log(el.title)
+        console.log(el.people[0].name)
+        console.log(el.images[0].baseimageurl)
+        console.log(el.century)
+      })
+    })
+  // .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
+  // .then(results => response.render('pages/searches/show', { searchResults: results }))
+  // .catch(errorHandler);
+}
+
 
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
