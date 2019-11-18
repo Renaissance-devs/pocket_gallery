@@ -7,6 +7,9 @@ const pg = require('pg');
 require('dotenv').config();
 const methodOverride = require('method-override');
 
+// Imported Functions
+const searchResults = require('./server_modules/routeHandlers');
+
 // Application Setup
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,6 +33,9 @@ app.use(methodOverride((request, response) => {
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('err', err => console.error(err));
+
+// Routes
+app.post('/searches', searchResults);
 
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
