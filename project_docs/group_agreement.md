@@ -32,12 +32,14 @@ Because our team consists of 4 members, it is possible that a majority consensus
 For any conflict that cannot be resolved according to these guidelines, we will involve an instructor to mediate as a method of last resort. 
 
 **Workflow:** 
- - We will maintain a single repo through GitHub : github.com/Renaissance-devs/pocket_gallery
+ - We will maintain a single repo through GitHub: github.com/Renaissance-devs/pocket_gallery
  - All team members act as equal contributors, and will clone the initial master branch with approved scaffolding to their individual local repositories.
+ - We will all work on our own branches, push to our branch in GitHub and then PR to the Dev branch https://github.com/Renaissance-devs/pocket_gallery/tree/dev
+ - The Dev branch requires two other team members to to approve PRs
+ - As a group, we will PR from Dev to the Master for major features
  - MVPS will be decomposed into coding and project oriented tasks, which will be individually assigned through Trello. 
  - Each developer will create a new feature branch titled appropriately and distinctly to the task. Branch names will all be lowercase with no spaces (use _ for any spaces).
  - Once completed, the branch will be submitted for code review and merge consideration through a pull request.
- - David will approve all merge requests. 
  - Developers agree to frequent A-C-P cycles- pushing only to their current working branch. 
  - Commits should be detailed, specific, and complete. 
  - Multiple team members are not to work separately on any one branch, task, or feature. 
