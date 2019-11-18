@@ -2,6 +2,10 @@ const superagent = require('superagent');
 require('dotenv').config();
 
 // This is where we will write callback functions for routes
+function search(request, response){
+  response.render('searches')
+}
+// This is where we will write callback functions for routes
 
 function searchResults(request, response) {
   let url = `https://api.harvardartmuseums.org/object?q=monet&apikey=${process.env.ART_API_KEY}`;
