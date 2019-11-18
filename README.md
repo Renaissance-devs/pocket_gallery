@@ -13,4 +13,10 @@ Pocket gallery is a web application that utilizes the Havard Art Museum API. Use
 
 ## Change Log & Version
 
+## User Stories
+https://github.com/Renaissance-devs/pocket_gallery/blob/master/project_docs/user_stories.md
+
+## Group Agreement
+https://github.com/Renaissance-devs/pocket_gallery/blob/master/project_docs/group_agreement.md
+
 ## Feature and time estimates
