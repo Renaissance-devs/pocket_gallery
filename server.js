@@ -51,7 +51,8 @@ app.get('/works/:id', getOneWork);
 app.get('/', getArt);
 app.get('/searches', search);
 app.post('/searches/results', searchResults);
-app.post('/works', createWork);
+app.post('/works', createArt);
+app.put('/works/:id', updateArt);
 
 
 app.use(methodOverride((request, response) => {
@@ -123,7 +124,7 @@ function searchResults(request, response) {
     .catch(error => console.error(error));
 }
 
-function createWork(request, response) {
+function createArt(request, response) {
   let {
     artist,
     title,
@@ -140,6 +141,27 @@ function createWork(request, response) {
     .then(result => {
       response.redirect(`/work/${result.rows[0].id}`);
     })
+    .catch(handleError);
+}
+
+function updateArt(request, response) {
+  let { artist, title, image_url, century, gallery } = request.body;
+
+  let SQL =
+    'UPDATE art_app SET artist=$1, title=$2, image_url=$3, century=$4, gallery=$5, WHERE id=$1;'; //Is the WHERE correct?
+
+  let values = [
+    artist,
+    title,
+    image_url,
+    century,
+    gallery,
+    request.params.id
+  ];
+
+  client
+    .query(SQL, values)
+    .then(response.redirect(`/works/${request.params.id}`))
     .catch(handleError);
 }
 
