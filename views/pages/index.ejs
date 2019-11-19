@@ -1,16 +1,12 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%- include('../layouts/head') %>
   <title>My Gallery</title>
-  <link rel="stylesheet" href="/reset.css">
-  <link rel="stylesheet" href="/base.css">
 </head>
 
 <body>
-    <%- include('../layouts/header.ejs') %>
+    <%- include('../layouts/header') %>
   <main>
     <h4>Saved Works (<%= count %>)</h4>
     <ul>
@@ -32,7 +28,7 @@
       <% }) %>
     </ul>
   </main>
-  <%- include('../layouts/footer.ejs') %>
+  <%- include('../layouts/footer') %>
 </body>
 
 </html>
