@@ -11,6 +11,16 @@
     <%- include('../layouts/header') %>
   <main>
     <h4>Saved Works (<%= count %>)</h4>
+    <h3>Select Gallery to View</h3>
+    <form action="" method="">
+      <select class="gallery-select" name="gallery" id="gallery">
+        <option value="*">All Galleries</option>
+        <% galleries.forEach(gallery => { %>
+        <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
+        <%})%>
+    </form>
+
+    </select>
     <ul>
       <% result.forEach(art => { %>
       <li class="art-items" data-work-id="<%= art.id %>">
