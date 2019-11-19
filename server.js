@@ -30,7 +30,6 @@ app.set('view engine', 'ejs');
 //********************************************************************* */ 
 
 function Art(info) {
-
   const placeholderImage = './img/placeholder.jpg';
 
   this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
@@ -64,8 +63,7 @@ app.get('/works/:id', getOneWork);
 app.put('/works/:id', updateWork);
 app.delete('/works/:id', deleteWork);
 
-
-
+app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
 
 // *********************************************************************
@@ -82,11 +80,10 @@ function getArt(request, response) {
       result: results.rows,
       count: results.rows.length
     }))
-    .catch(handleError);
+    .catch((error, response) => handleError(error, response));
 }
 
 function getOneWork(request, response) {
-
   getGalleries().then(galleries => {
     let SQL = `SELECT * FROM works WHERE id=$1`;
     const values = [request.params.id];
@@ -122,19 +119,20 @@ function searchResults(request, response) {
   let url = `https://api.harvardartmuseums.org/object?${param}=${search}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
   superagent.get(url)
     .then(apiResponse => {
-      if(apiResponse.body.info.totalrecords === 0){
+      if (apiResponse.body.info.totalrecords === 0) {
         response.render('searches/noResults');
-      }else {
+      } else {
         let works = apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult));
-        response.render('works/show', {works: works})
+        response.render('works/show', {
+          works: works
+        })
       }
     })
-    .catch(error => console.error(error));
+    .catch((error, response) => handleError(error, response));
 }
 
 
 function updateWork(request, response) {
-  console.log('update work');
   const gallery = request.body.gallery;
   const id = request.params.id;
   const values = [gallery, id];
@@ -142,17 +140,16 @@ function updateWork(request, response) {
 
   return client.query(SQL, values).then(results => {
     response.redirect(`/works/${id}`);
-  }).catch(error => console.error(error));
+  }).catch((error, response) => handleError(error, response));
 }
 
 function deleteWork(request, response) {
   const values = [request.params.id];
   const SQL = `DELETE FROM works WHERE id=$1`;
-  client.query(SQL, values).then(_ => response.redirect('/')).catch(error => handleError(error));
+  client.query(SQL, values).then(_ => response.redirect('/')).catch((error, response) => handleError(error, response));
 }
 
 function createWork(request, response) {
-
   let {
     artist,
     title,
@@ -160,8 +157,8 @@ function createWork(request, response) {
     gallery,
     century
   } = request.body;
-  let SQL =
-    'INSERT INTO works(artist, title, image_url, gallery, century) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
+
+  let SQL = 'INSERT INTO works(artist, title, image_url, gallery, century) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
   let values = [artist, title, image_url, gallery, century];
 
   return client
@@ -169,31 +166,9 @@ function createWork(request, response) {
     .then(result => {
       response.redirect(`/work/${result.rows[0].id}`);
     })
-    .catch(handleError);
+    .catch((error, response) => handleError(error, response));
 }
 
-function updateArt(request, response) {
-  let { artist, title, image_url, century, gallery } = request.body;
-
-  let SQL =
-    'UPDATE art_app SET artist=$1, title=$2, image_url=$3, century=$4, gallery=$5, WHERE id=$1;'; //Is the WHERE correct?
-
-  let values = [
-    artist,
-    title,
-    image_url,
-    century,
-    gallery,
-    request.params.id
-  ];
-
-  client
-    .query(SQL, values)
-    .then(response.redirect(`/works/${request.params.id}`))
-    .catch(handleError);
-}
-
-// Error Handler
 function handleError(error, response) {
   response.render('pages/error', {
     error: error
