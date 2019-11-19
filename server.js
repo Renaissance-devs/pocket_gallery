@@ -125,12 +125,10 @@ function searchResults(request, response) {
       if(apiResponse.body.info.totalrecords === 0){
         response.render('searches/noResults');
       }else {
-        apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult));
+        let works = apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult));
+        response.render('works/show', {works: works})
       }
     })
-    .then(results => response.render('works/show', {
-      works: results
-    }))
     .catch(error => console.error(error));
 }
 
