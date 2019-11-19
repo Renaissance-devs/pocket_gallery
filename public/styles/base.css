@@ -22,8 +22,13 @@ a {
   color: white;
 }
 
+nav a {
+  color: #847577;
+}
+
 a:hover {
   font-weight: bolder;
+  transition: color 0.3s ease;
 }
 
 header {
