@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('err', err => console.error(err));
 
-// Application Middleware
+
 app.use(
   express.urlencoded({
     extended: true
@@ -22,6 +22,7 @@ app.use(
 );
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+
 // *********************************************************************
 // 
 //  DATA MODEL
@@ -43,18 +44,16 @@ function Art(info) {
 // 
 //********************************************************************* */ 
 
-app.get('/', getIndex);
+app.get('/', getArt);
 app.get('/works/:id', getOneWork);
 app.get('/', getArt);
 app.get('/searches', search);
 app.post('/searches/results', searchResults);
-app.post('/works', createWork)
-
+app.post('/works', createWork);
 
 
 app.use(methodOverride((request, response) => {
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
-    // look in urlencoded POST bodies and delete it
     let method = request.body._method;
     delete request.body._method;
     return method;
@@ -67,9 +66,6 @@ app.use(methodOverride((request, response) => {
 // 
 //********************************************************************* */ 
 
-function getIndex(request, response) {
-  response.render('pages/index');
-}
 
 function getArt(request, response) {
   let SQL = 'SELECT * FROM works;';
