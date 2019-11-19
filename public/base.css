@@ -1,3 +1,22 @@
+body {
+  text-align: center;
+}
+
 img {
-  width: 100%;
+  width: 90%;
+}
+
+footer {
+  background: black;
+  color: white;
+  padding: 30px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  font-weight: bolder;
 }
