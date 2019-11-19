@@ -11,6 +11,9 @@ const methodOverride = require('method-override');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('err', err => console.error(err));
+
 // Application Middleware
 app.use(
   express.urlencoded({
@@ -19,18 +22,33 @@ app.use(
 );
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+// *********************************************************************
+// 
+//  DATA MODEL
+// 
+//********************************************************************* */ 
+
+function Art(info) {
+  const placeholderImage = 'https://unsplash.com/photos/PbEzsnNLcA4';
+  this.artist = info.people[0].name || 'No artist available';
+  this.title = info.title || 'No title available';
+  this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
+  this.century = info.century || 'We don\'t have this information';
+}
 
 
 // *********************************************************************
 // 
+//  ROUTES
 // 
-//   ROUTES
-// 
-// 
-// *********************************************************************
+//********************************************************************* */ 
+
 app.get('/', getIndex);
-
 app.get('/works/:id', getOneWork);
+app.get('/', getArt);
+app.get('/searches', search);
+app.post('/searches/results', searchResults);
+app.post('/works', createWork)
 
 
 
@@ -43,20 +61,21 @@ app.use(methodOverride((request, response) => {
   }
 }));
 
-// Configure Database
-const client = new pg.Client(process.env.DATABASE_URL);
-client.on('err', err => console.error(err));
+// *********************************************************************
+// 
+//  ROUTE HANDLERS
+// 
+//********************************************************************* */ 
 
-// Art Constructor
-function Art(info) {
-  const placeholderImage = 'https://unsplash.com/photos/PbEzsnNLcA4';
-  this.artist = info.people[0].name || 'No artist available';
-  this.title = info.title || 'No title available';
-  this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
-  this.century = info.century || 'We don\'t have this information';
+function getArt(request, response) {
+  let SQL = 'SELECT * FROM works;';
+  return client.query(SQL)
+    .then(results => response.render('pages/index', {
+      result: results.rows,
+      count: results.rows.length
+    }))
+    .catch(handleError);
 }
-
-
 
 function getOneWork(request, response) {
   let SQL = `SELECT * FROM works WHERE id=$1`;
@@ -66,29 +85,6 @@ function getOneWork(request, response) {
       work: results
     })
   });
-}
-
-const client = new pg.Client(process.env.DATABASE_URL);
-client.connect();
-client.on('err', err => console.error(err));
-
-app.get('/', getArt);
-app.get('/searches', search);
-app.post('/searches/results', searchResults);
-// Inserts the selected art work into the database.
-// After the data is inserted, it should render the work with /work/:id
-app.post('/works', createWork);
-
-
-// Callback Functions
-function getArt(request, response) {
-  let SQL = 'SELECT * FROM works;';
-  return client.query(SQL)
-    .then(results => response.render('pages/index', {
-      result: results.rows,
-      count: results.rows.length
-    }))
-    .catch(handleError);
 }
 
 function search(request, response) {
@@ -142,6 +138,13 @@ function handleError(error, response) {
     error: error
   });
 }
+
+// *********************************************************************
+// 
+//  ENTRY POINT
+// 
+//********************************************************************* */ 
+
 
 client.connect()
   .then(() => {
