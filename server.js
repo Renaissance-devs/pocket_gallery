@@ -38,13 +38,12 @@ function Art(info) {
   const placeholderImage = 'https://unsplash.com/photos/PbEzsnNLcA4';
   this.artist = info.people[0].name || 'No artist available';
   this.title = info.title || 'No title available';
-  // this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
-  this.image_url = info.images[0].baseimageurl || placeholderImage;
+  this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
   this.century = info.century || 'We don\'t have this information';
 }
 
 // Routes
-app.get('/', getIndex);
+app.get('/', getArt);
 app.get('/searches', search);
 app.post('/searches/results', searchResults);
 // Inserts the selected art work into the database.
@@ -52,8 +51,11 @@ app.post('/searches/results', searchResults);
 app.post('/works', createWork);
 
 // Callback Functions
-function getIndex(request, response) {
-  response.render('pages/index');
+function getArt(request, response) {
+  let SQL = 'SELECT * FROM works;';
+  return client.query(SQL)
+    .then (results => response.render('pages/index', {result: results.rows, count: results.rows.length}))
+    .catch(handleError);
 }
 
 function search(request, response){
