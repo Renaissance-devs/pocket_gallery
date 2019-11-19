@@ -16,6 +16,7 @@
     <p>Century: <%= work.century %></p>
     <p>Gallery: <%= work.gallery %></p>
     <br>
+    
     <form action="/works/<%=work.id%>" method="POST">
       <input type="hidden" name="_method" value="PUT">
       <input type="hidden" id="image_url" value="<%= work.image_url%>">
@@ -38,5 +39,9 @@
  </main>
  <%- include('../layouts/footer') %>
 </body>
-
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
 </html>
