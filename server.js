@@ -31,7 +31,7 @@ app.set('view engine', 'ejs');
 
 function Art(info) {
   const placeholderImage = 'https://unsplash.com/photos/PbEzsnNLcA4';
-  this.artist = info.people[0].name || 'No artist available';
+  this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
   this.title = info.title || 'No title available';
   this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
   this.century = info.century || 'We don\'t have this information';
@@ -107,7 +107,6 @@ function searchResults(request, response) {
     search = request.body.search[0];
   }
   let url = `https://api.harvardartmuseums.org/object?${param}=${search}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
-  console.log(url);
   superagent.get(url)
     .then(apiResponse => apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult)))
     .then(results => response.render('works/show', {
