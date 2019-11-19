@@ -5,7 +5,11 @@
   <input type="text" name="century" value="<%= work.century %>">
   <input type="text" name="image_url" value="<%= work.image_url %>">
   <textarea name="description" placeholder="Description" cols="30" rows="10"><%= work.description %></textarea>
-
+  <select name="gallery" id="gallery">
+      <% galleries.forEach(gallery => { %>
+      <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
+      <%})%>
+    </select>
   <br>
   <button type="submit"><%- 'update' === formAction? "Update Work": "Add A Work" %></button>
 </form>
