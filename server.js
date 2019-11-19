@@ -67,6 +67,10 @@ app.use(methodOverride((request, response) => {
 // 
 //********************************************************************* */ 
 
+function getIndex(request, response) {
+  response.render('pages/index');
+}
+
 function getArt(request, response) {
   let SQL = 'SELECT * FROM works;';
   return client.query(SQL)
