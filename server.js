@@ -30,7 +30,9 @@ app.set('view engine', 'ejs');
 //********************************************************************* */ 
 
 function Art(info) {
-  const placeholderImage = 'https://unsplash.com/photos/PbEzsnNLcA4';
+
+  const placeholderImage = './img/placeholder.jpg';
+  
   this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
   this.title = info.title || 'No title available';
   this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
@@ -82,7 +84,7 @@ function getOneWork(request, response) {
   const values = [request.params.id];
   client.query(SQL, values).then(results => {
     response.render('works/detail', {
-      work: results
+      work: results.rows[0]
     })
   });
 }
