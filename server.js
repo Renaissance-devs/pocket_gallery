@@ -30,9 +30,7 @@ app.set('view engine', 'ejs');
 //********************************************************************* */ 
 
 function Art(info) {
-
-  const placeholderImage = './img/placeholder.jpg';
-
+  const placeholderImage = './public/assets/placeholder.jpg';
   this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
   this.title = info.title || 'No title available';
   this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
@@ -126,7 +124,7 @@ function searchResults(request, response) {
         response.render('searches/noResults');
       }else {
         let works = apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult));
-        response.render('works/show', {works: works})
+        response.render('searches/show', {works: works})
       }
     })
     .catch(error => console.error(error));
