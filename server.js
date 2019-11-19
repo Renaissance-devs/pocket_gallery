@@ -24,15 +24,15 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // *********************************************************************
-// 
+//
 //  DATA MODEL
-// 
+//
 //********************************************************************* */ 
 
 function Art(info) {
 
   const placeholderImage = './img/placeholder.jpg';
-  
+
   this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
   this.title = info.title || 'No title available';
   this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
@@ -41,10 +41,10 @@ function Art(info) {
 
 
 // *********************************************************************
-// 
+//
 //  ROUTES
-// 
-//********************************************************************* */ 
+//
+//********************************************************************* */
 
 app.get('/', getArt);
 app.get('/works/:id', getOneWork);
@@ -63,10 +63,10 @@ app.use(methodOverride((request, response) => {
 }));
 
 // *********************************************************************
-// 
+//
 //  ROUTE HANDLERS
-// 
-//********************************************************************* */ 
+//
+//********************************************************************* */
 
 
 function getArt(request, response) {
@@ -110,7 +110,13 @@ function searchResults(request, response) {
   }
   let url = `https://api.harvardartmuseums.org/object?${param}=${search}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult)))
+    .then(apiResponse => {
+      if(apiResponse.body.info.totalrecords === 0){
+        response.render('searches/noResults');
+      }else {
+        apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult));
+      }
+    })
     .then(results => response.render('works/show', {
       works: results
     }))
@@ -145,10 +151,10 @@ function handleError(error, response) {
 }
 
 // *********************************************************************
-// 
+//
 //  ENTRY POINT
-// 
-//********************************************************************* */ 
+//
+//********************************************************************* */
 
 
 client.connect()
