@@ -1,26 +1,29 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <%- include ../layouts/head %>
+  <title>Search Results</title>
 </head>
 
 <body>
-  <section>
-    <ul>
-      <% works.forEach(work => { %>
-      <li>
-        <img src="<%=work.image_url%>">
-        <p>Title: <%= work.title %></p>
-        <p>Artist: <%= work.artist %></p>
-        <p>Century: <%= work.century %></p>
-        <p>Gallery: <%= work.gallery %></p>
-      </li>
-      <%})%>
-    </ul>
-  </section>
+  <%- include ../layouts/header %>
+  <main>
+    <section>
+      <ul>
+        <% works.forEach(work => { %>
+        <li>
+          <img src="<%=work.image_url%>">
+          <p>Title: <%= work.title %></p>
+          <p>Artist: <%= work.artist %></p>
+          <p>Century: <%= work.century %></p>
+          <p>Gallery: <%= work.gallery %></p>
+        </li>
+        <%})%>
+      </ul>
+    </section>
+  </main>
+  <%- include ../layouts/footer %>
 </body>
 
 </html>

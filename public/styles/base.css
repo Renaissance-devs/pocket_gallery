@@ -1,0 +1,38 @@
+body {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+  width: 90%;
+}
+
+footer {
+  background: black;
+  color: white;
+  padding: 30px;
+}
+
+#details-a {
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  font-weight: bolder;
+}
+
+header {
+  background: black;
+  padding: 30px;
+}
+
+h1 {
+  /* color: rgb(255, 217, 0); */
+  font-size: 3em;
+  font-weight: bold;
+}
