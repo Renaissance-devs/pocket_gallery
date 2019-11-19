@@ -44,14 +44,6 @@ function Art(info) {
 // 
 //********************************************************************* */ 
 
-app.get('/', getArt);
-app.get('/works/:id', getOneWork);
-app.get('/', getArt);
-app.get('/searches', search);
-app.post('/searches/results', searchResults);
-app.post('/works', createWork);
-
-
 app.use(methodOverride((request, response) => {
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
     let method = request.body._method;
@@ -59,6 +51,20 @@ app.use(methodOverride((request, response) => {
     return method;
   }
 }));
+
+app.get('/', getArt);
+
+
+app.get('/searches', search);
+app.post('/searches/results', searchResults);
+app.post('/works', createWork);
+app.get('/works/:id', getOneWork);
+app.put('/works/:id', updateWork);
+app.delete('/works/:id', deleteWork);
+
+
+
+
 
 // *********************************************************************
 // 
@@ -78,12 +84,17 @@ function getArt(request, response) {
 }
 
 function getOneWork(request, response) {
-  let SQL = `SELECT * FROM works WHERE id=$1`;
-  const values = [request.params.id];
-  client.query(SQL, values).then(results => {
-    response.render('works/detail', {
-      work: results.rows[0]
+
+  getGalleries().then(galleries => {
+    let SQL = `SELECT * FROM works WHERE id=$1`;
+    const values = [request.params.id];
+    return client.query(SQL, values).then(results => {
+      response.render('works/detail', {
+        work: results.rows[0],
+        galleries: galleries.rows
+      });
     })
+
   });
 }
 
@@ -112,6 +123,24 @@ function searchResults(request, response) {
     .catch(handleError);
 }
 
+function updateWork(request, response) {
+  console.log('update work');
+  const gallery = request.body.gallery;
+  const id = request.params.id;
+  const values = [gallery, id];
+  let SQL = `UPDATE works SET gallery=$1 WHERE id=$2 RETURNING *`;
+
+  return client.query(SQL, values).then(results => {
+    response.redirect(`/works/${id}`);
+  }).catch(error => console.error(error));
+}
+
+function deleteWork(request, response) {
+  const values = [request.params.id];
+  const SQL = `DELETE FROM works WHERE id=$1`;
+  client.query(SQL, values).then(_ => response.redirect('/')).catch(error => handleError(error));
+}
+
 function createWork(request, response) {
   let {
     artist,
@@ -137,6 +166,16 @@ function handleError(error, response) {
   response.render('pages/error', {
     error: error
   });
+}
+// *********************************************************************
+// 
+//  HELPERS
+// 
+//********************************************************************* */ 
+
+function getGalleries() {
+  const SQL = `SELECT DISTINCT gallery FROM works ORDER BY gallery`;
+  return client.query(SQL);
 }
 
 // *********************************************************************
