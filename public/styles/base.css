@@ -8,7 +8,7 @@ img {
 }
 
 footer {
-  background: black;
+  background: #847577;;
   color: white;
   padding: 30px;
 }
@@ -27,12 +27,12 @@ a:hover {
 }
 
 header {
-  background: black;
+  background: #847577;
   padding: 30px;
 }
 
 h1 {
-  /* color: rgb(255, 217, 0); */
+  color: #fbfbf2;
   font-size: 3em;
   font-weight: bold;
 }
