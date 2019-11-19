@@ -3,18 +3,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-img {
-  width: 90%;
-}
-
-footer {
-  background: #847577;;
-  color: white;
-  padding: 30px;
-}
-
-#details-a {
-  color: black;
+h1 {
+  color: #e5e6e4;
+  font-size: 3em;
+  font-weight: bold;
 }
 
 a {
@@ -22,13 +14,21 @@ a {
   color: white;
 }
 
+a:hover {
+  font-weight: bolder;
+  transition: color 0.3s ease;
+}
+
 nav a {
   color: #847577;
 }
 
-a:hover {
-  font-weight: bolder;
-  transition: color 0.3s ease;
+#details-a {
+  color: black;
+}
+
+img {
+  width: 90%;
 }
 
 header {
@@ -36,8 +36,8 @@ header {
   padding: 30px;
 }
 
-h1 {
-  color: #fbfbf2;
-  font-size: 3em;
-  font-weight: bold;
+footer {
+  background: #847577;
+  color: white;
+  padding: 30px;
 }
