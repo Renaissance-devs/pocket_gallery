@@ -109,7 +109,7 @@ function searchResults(request, response) {
   let url = `https://api.harvardartmuseums.org/object?${param}=${search}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
   console.log(url);
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.records.map(artResult => new Art(artResult)))
+    .then(apiResponse => apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult)))
     .then(results => response.render('works/show', {
       works: results
     }))
