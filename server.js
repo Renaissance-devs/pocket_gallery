@@ -30,8 +30,10 @@ app.set('view engine', 'ejs');
 //********************************************************************* */ 
 
 function Art(info) {
+
   const placeholderImage = './img/placeholder.jpg';
-  this.artist = info.people[0].name || 'No artist available';
+  
+  this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
   this.title = info.title || 'No title available';
   this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
   this.century = info.century || 'We don\'t have this information';
@@ -92,24 +94,27 @@ function search(request, response) {
 }
 
 function searchResults(request, response) {
-  let param = 'keyword';
+  let param = 'q';
+  let search = request.body.search;
   if (request.body.search[1] === 'title') {
     param = 'title';
+    search = request.body.search[0];
   }
   if (request.body.search[1] === 'artist') {
     param = 'person'
+    search = request.body.search[0];
   }
   if (request.body.search[1] === 'color') {
-    param = 'color';
+    param = 'q=color';
+    search = request.body.search[0];
   }
-  let url = `https://api.harvardartmuseums.org/object?q=${param}=${request.body.search[0]}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
-  console.log(url);
+  let url = `https://api.harvardartmuseums.org/object?${param}=${search}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.records.map(artResult => new Art(artResult)))
+    .then(apiResponse => apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult)))
     .then(results => response.render('works/show', {
       works: results
     }))
-    .catch(handleError);
+    .catch(error => console.error(error));
 }
 
 function createWork(request, response) {
