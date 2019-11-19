@@ -31,7 +31,7 @@ app.set('view engine', 'ejs');
 
 function Art(info) {
 
-  const placeholderImage = './img/placeholder.jpg';
+  const placeholderImage = './public/assets/placeholder.jpg';
   
   this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
   this.title = info.title || 'No title available';

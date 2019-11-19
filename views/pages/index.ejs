@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <%- include('../layouts/head') %>
+  <link rel="shortcut icon" href="/assets/painting.png" type="image/x-icon">
   <title>My Gallery</title>
 </head>
 
@@ -22,7 +24,7 @@
             <%= art.gallery %>
             <% } %>
           </p>
-          <p class="detail-button"><a href="/works/<%= art.id %>">View Details</a></p>
+          <p class="detail-button"><a id="details-a" href="/works/<%= art.id %>">View Details</a></p>
         </section>
       </li>
       <% }) %>
