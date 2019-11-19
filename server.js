@@ -48,23 +48,12 @@ function getIndex(request, response) {
 
 function Art(info) {
   const placeholderImage = 'https://unsplash.com/photos/PbEzsnNLcA4';
-  let httpRegex = /^(http:\/\/)/g;
 
-  this.artist = info.people[0].name ? info.people[0].name : 'No artist available';
-  this.title = info.title ? info.title : 'No title available';
-
-  this.artist = info.artist ? info.authors[0] : 'No artist available';
-  this.image_url = info.imageLinks
-    ? info.imageLinks.thumbnail.replace(httpRegex, 'https://')
-    : placeholderImage;
-  this.details = info.details ? info.details : 'No details available';
-  this.gallery = info.gallery
-    ? info.gallery
-    : 'No gallery information available';
-  this.century = info.century
-    ? info.century
-    : 'We do not have this information';
-}
+  this.artist = info.people[0].name || 'No artist available';
+  this.title = info.title || 'No title available';
+  // this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
+  this.image_url = info.url || placeholderImage;
+  this.century = info.century || 'We don\'t have this information';
 
 //Inserts the selected art work into the database.
 //After the data is inserted, it should render the work with /work/:id
@@ -85,7 +74,6 @@ function createWork(request, response) {
 
   this.image_url = info.images[0].baseimageurl ? info.images[0].baseimageurl.replace(httpRegex, 'https://') : placeholderImage;
   this.century = info.century ? info.century : 'We don\'t have this information';
-
 }
 
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -125,7 +113,7 @@ function searchResults(request, response) {
     //   })
     // })
     .then(apiResponse => apiResponse.body.records.map(artResult => new Art(artResult)))
-    .then(results => response.render('searches/show', { works: results }))
+    .then(results => response.render('works/show', { works: results }))
     // .catch(errorHandler);
 }
 
