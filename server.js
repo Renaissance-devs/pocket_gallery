@@ -24,6 +24,9 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 
+
+//ART CONSTRUCTOR
+
 app.get('/', getIndex);
 
 app.use(methodOverride((request, response) => {
@@ -42,6 +45,7 @@ function getIndex(request, response) {
 }
 //BOOK CONSTRUCTOR
 
+
 function Art(info) {
   const placeholderImage = 'https://unsplash.com/photos/PbEzsnNLcA4';
 
@@ -50,6 +54,26 @@ function Art(info) {
   // this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
   this.image_url = info.url || placeholderImage;
   this.century = info.century || 'We don\'t have this information';
+
+//Inserts the selected art work into the database.
+//After the data is inserted, it should render the work with /work/:id
+app.post('/works', createWork);
+
+function createWork(request, response) {
+  let { artist, title, image_url, gallery, century } = request.body;
+  let SQL =
+    'INSERT INTO works(artist, title, image_url, gallery, century) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
+  let values = [artist, title, image_url, gallery, century];
+
+  return client
+    .query(SQL, values)
+    .then(result => {
+      response.redirect(`/work/${result.rows[0].id}`);
+    })
+    .catch(error => handleError(error, response));
+
+  this.image_url = info.images[0].baseimageurl ? info.images[0].baseimageurl.replace(httpRegex, 'https://') : placeholderImage;
+  this.century = info.century ? info.century : 'We don\'t have this information';
 }
 
 const client = new pg.Client(process.env.DATABASE_URL);
