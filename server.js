@@ -88,7 +88,7 @@ function getOneWork(request, response) {
 }
 
 function search(request, response) {
-  response.render('searches')
+  response.render('searches/new')
 }
 
 function searchResults(request, response) {
