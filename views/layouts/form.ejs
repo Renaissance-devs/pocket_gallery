@@ -1,0 +1,15 @@
+<form action="<%= 'update' === formAction? `/works/${work.id}`: '/works' %>" method="post">
+  <input type="hidden" name="_method" value="<%- 'update' === formAction? 'put': 'post' %>">
+  <input type="text" name="title" value="<%- work.title %>">
+  <input type="text" name="author" value="<%= work.author %>">
+  <input type="text" name="century" value="<%= work.century %>">
+  <input type="text" name="image_url" value="<%= work.image_url %>">
+  <textarea name="description" placeholder="Description" cols="30" rows="10"><%= work.description %></textarea>
+  <select name="" id="shelf-dropdown">
+    <% bookshelves.forEach(index => { %>
+      <option value="<%= index.bookshelf %>"><%= index.bookshelf %></option>
+    <%  }) %>
+  </select>
+  <br>
+  <button type="submit"><%- 'update' === formAction? "Update Work": "Add A Work" %></button>
+</form>
