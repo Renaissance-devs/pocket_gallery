@@ -1,0 +1,33 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <section>
+    <ul>
+      <% works.forEach(work => { %>
+      <li>
+        <img src="<%=work.image_url%>">
+        <p>Title: <%= work.title %></p>
+        <p>Artist: <%= work.artist %></p>
+        <button class="select-work">Select this Work</button>
+        <form action="/works" method="POST">
+          <input type="text" name="title" id="title" value="<%= work.title %>">
+          <input type="text" name="artist" id="artist" value="<%= work.artist %>">
+          <input type="text" name="century" id="century" value="<%= work.century %>">
+          <input type="text" name="gallery" id="gallery" value="" required>
+          <input type="hidden" name="image_url" id="image_url" value="<%= work.image_url %>">
+          <input type="submit" value="Add this book">
+        </form>
+      </li>
+      <%})%>
+    </ul>
+  </section>
+</body>
+
+</html>
