@@ -56,3 +56,16 @@ footer {
   color: white;
   padding: 30px;
 }
+
+#error-p {
+  margin: 30px;
+  font-size: 2em;
+}
+
+#scream {
+  margin: 30px 0px;
+}
+
+#error-a {
+  color: black;
+}

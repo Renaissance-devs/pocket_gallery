@@ -54,16 +54,13 @@ app.use(methodOverride((request, response) => {
 }));
 
 app.get('/', getArt);
-
-
 app.get('/searches', search);
 app.post('/searches/results', searchResults);
 app.post('/works', createWork);
 app.get('/works/:id', getOneWork);
 app.put('/works/:id', updateWork);
 app.delete('/works/:id', deleteWork);
-
-app.get('*', (request, response) => response.status(404).send('This route does not exist'));
+app.get('*', (request, response) => response.render('pages/error', { error: '404 Page Not Found' }));
 
 
 // *********************************************************************
