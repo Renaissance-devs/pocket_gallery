@@ -17,7 +17,10 @@
           <p>Title: <%= work.title %></p>
           <p>Artist: <%= work.artist %></p>
           <p>Century: <%= work.century %></p>
-          <p>Gallery: <%= work.gallery %></p>
+          <button class="select-button">Select this Work</button>
+          <section class="hide-me" id="hidden-form">
+            <%- include('../layouts/form', { formAction: 'POST', work: work}) %>
+          </section>
         </li>
         <%})%>
       </ul>
@@ -25,5 +28,9 @@
   </main>
   <%- include ../layouts/footer %>
 </body>
-
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
 </html>

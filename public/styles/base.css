@@ -36,6 +36,21 @@ header {
   padding: 30px;
 }
 
+
+h1 {
+  /* color: rgb(255, 217, 0); */
+  font-size: 3em;
+  font-weight: bold;
+}
+
+#hide-me input, #hide-me textarea {
+  display: none;
+}
+
+.hide-me {
+  display: none;
+}
+
 footer {
   background: #847577;
   color: white;
