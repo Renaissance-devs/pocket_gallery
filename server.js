@@ -165,7 +165,7 @@ function createWork(request, response) {
   return client
     .query(SQL, values)
     .then(result => {
-      response.redirect(`/work/${result.rows[0].id}`);
+      response.redirect(`/works/${result.rows[0].id}`);
     })
     .catch(handleError);
 }
