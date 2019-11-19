@@ -18,8 +18,16 @@ app.use(express.urlencoded({
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-
+// *********************************************************************
+// 
+// 
+//   ROUTES
+// 
+// 
+// *********************************************************************
 app.get('/', getIndex);
+
+app.get('/works/:id', getOneWork);
 
 app.use(methodOverride((request, response) => {
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
@@ -33,6 +41,16 @@ app.use(methodOverride((request, response) => {
 
 function getIndex(request, response) {
   response.render('pages/index');
+}
+
+function getOneWork(request, response) {
+  let SQL = `SELECT * FROM works WHERE id=$1`;
+  const values = [request.params.id];
+  client.query(SQL, values).then(results => {
+    response.render('works/detail', {
+      work: results
+    })
+  });
 }
 
 const client = new pg.Client(process.env.DATABASE_URL);
