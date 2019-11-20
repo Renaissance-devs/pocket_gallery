@@ -11,7 +11,7 @@
  <main>
   <h4>Details</h4>  
   <section  >
-    <img src="<%= work.image_url %>">
+    <img src="<%= work.image_url ? work.image_url : '/assets/placeholder.jpg' %>">
     <p>Title: <%= work.title %></p>
     <p>Artist: <%= work.artist %></p>
     <p>Century: <%= work.century %></p>
