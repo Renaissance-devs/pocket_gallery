@@ -10,6 +10,18 @@
     <%- include('../layouts/header') %>
   <main>
     <h4>Saved Works (<%= count %>)</h4>
+    <h3>Select Gallery to View</h3>
+    <form action="/gallery" method="POST">
+      <select id="gallery-select" name="gallery">
+        <option value="*">All Galleries</option>
+        <% galleries.forEach(gallery => { %>
+        <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
+        <%})%>
+      </select>
+      <button type="submit">View Gallery</button>
+    </form>
+
+    </select>
     <ul>
       <% result.forEach(art => { %>
       <li class="art-items" data-work-id="<%= art.id %>">
@@ -31,5 +43,9 @@
   </main>
   <%- include('../layouts/footer') %>
 </body>
-
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
 </html>

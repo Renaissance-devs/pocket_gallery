@@ -55,6 +55,7 @@ app.use(methodOverride((request, response) => {
 
 app.get('/', getArt);
 app.get('/searches', search);
+app.post('/gallery', gallerySelect);
 app.post('/searches/results', searchResults);
 app.post('/works', createWork);
 app.get('/works/:id', getOneWork);
@@ -68,16 +69,25 @@ app.get('*', (request, response) => response.render('pages/error', { error: '404
 //  ROUTE HANDLERS
 //
 //********************************************************************* */
+function gallerySelect(request, response) {
+  let SQL = `SELECT * FROM works WHERE gallery=$1`
+  const values = [request.body.gallery];
+  console.log(request.body.gallery);
 
+  return client.query(SQL, values)
+    .then(results => {
+      console.log(results.rows);
+      getGalleries().then(galleries => response.render('pages/index', {result: results.rows, count: results.rows.length, galleries: galleries.rows}))
+    })
+}
 
 function getArt(request, response) {
-  let SQL = 'SELECT * FROM works;';
+  let SQL = `SELECT * FROM works;`;
   return client.query(SQL)
-    .then(results => response.render('pages/index', {
-      result: results.rows,
-      count: results.rows.length
-    }))
-    .catch((error, response) => handleError(error, response));
+    .then(results => {
+      getGalleries().then(galleries => response.render('pages/index', {result: results.rows, count: results.rows.length, galleries: galleries.rows}))
+    })
+    .catch(handleError);
 }
 
 function getOneWork(request, response) {
@@ -171,9 +181,9 @@ function handleError(error, response) {
   });
 }
 // *********************************************************************
-// 
+//
 //  HELPERS
-// 
+//
 //********************************************************************* */ 
 
 function getGalleries() {
