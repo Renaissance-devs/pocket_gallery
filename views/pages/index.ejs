@@ -9,8 +9,10 @@
 <body>
   <%- include('../layouts/header') %>
   <main>
+
     <h4>Saved Works (<%= count %>) &mdash; <a id="h4-a" href="/searches">Add to Your Gallery <i
           class="fas fa-search"></i></a></h4>
+
     <section class="subhead">
       <h3>Create a new Gallery</h3>
       <form action="/gallery" method="POST">
@@ -36,12 +38,14 @@
     <ul>
       <% result.forEach(art => { %>
       <li class="art-items" data-work-id="<%= art.id %>">
-        <section id="work-section">
-          <img class="frame" src="<%= art.image_url %>" alt="image of painting">
+        <section class="work-section">
+          <img class="frame" src="<%= art.image_url ? art.image_url : 'assets/placeholder.jpg' %>" alt="image of painting">
           <h3><%= art.title %></h3>
+
           <span><%= art.artist %></span>
           <p>Gallery -- <%= art.name %></p>
           <button id="button-detail" onclick="window.location.href = '/works/<%= art.id %>';">View Details</button>
+
         </section>
       </li>
       <% }) %>

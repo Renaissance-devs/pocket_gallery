@@ -3,6 +3,7 @@
 // Application Dependencies
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
@@ -22,25 +23,30 @@ app.use(
 );
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+app.use(cors());
 
 // *********************************************************************
 //
 //  DATA MODEL
 //
-//********************************************************************* */ 
+//********************************************************************* */
+
 
 function Art(info, gallery) {
   const placeholderImage = './public/assets/placeholder.jpg';
 
-  this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
-  this.title = info.title || 'No title available';
+
+  this.artist = info.peoplecount > 0 ? info.people[0].name : 'artist unavailable';
+  this.title = info.title || 'title unavailable';
   this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
+
   this.century = info.century || 'We don\'t have this information';
   this.gallery = gallery;
 }
 
 function Gallery(gallery) {
   this.name = gallery.name;
+
 }
 
 
@@ -115,6 +121,8 @@ function getOneWork(request, response) {
     let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE works.id=$1`;
     const values = [request.params.id];
     return client.query(SQL, values).then(results => {
+      console.log(results.rows[0]);
+      getColors(results.rows[0].image_url);
       response.render('works/detail', {
         work: results.rows[0],
         galleries: galleries.rows
@@ -129,8 +137,12 @@ function search(request, response) {
 }
 
 function searchResults(request, response) {
-  let param = 'q';
-  let search = request.body.search;
+  let param;
+  let search;
+  if (request.body.search[1] === 'keyword'){
+    param = 'keyword';
+    search = request.body.search[0];
+  }
   if (request.body.search[1] === 'title') {
     param = 'title';
     search = request.body.search[0];
@@ -159,8 +171,20 @@ function searchResults(request, response) {
         })
       }
     });
+
 }
 
+function getColors(image_url){
+  let url = `https://api.imagga.com/v2/colors?image_url=${image_url}&extract_object_colors=0`
+  superagent.get(url)
+    .set('Authorization', `Basic ${process.env.COLOR_API_KEY}`)
+    .then(results => {
+      let colorValues = []
+      results.body.result.colors.image_colors.forEach(color => colorValues.push(color.closest_palette_color_html_code))
+      console.log(colorValues);
+    })
+    .catch(err => console.error(err));
+}
 
 
 
@@ -187,7 +211,9 @@ function updateWork(request, response) {
 function deleteWork(request, response) {
   const values = [request.params.id];
   const SQL = `DELETE FROM works WHERE id=$1`;
+
   client.query(SQL, values).then(() => response.redirect('/')).catch((error, response) => handleError(error, response));
+
 }
 
 function createWork(request, response) {
@@ -197,6 +223,7 @@ function createWork(request, response) {
     image_url,
     century
   } = request.body;
+
 
   let SQLworks = 'INSERT INTO works(artist, title, image_url, century, gallery_id) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
   let valuesWorks = [artist, title, image_url, century];
@@ -216,6 +243,7 @@ function createGallery(request, response) {
   const values = [request.body.gallery];
   const SQL = `INSERT INTO gallery(name) VALUES ($1)`;
   client.query(SQL, values).then(() => response.redirect('/'));
+
 }
 
 function handleError(error, response) {
@@ -227,12 +255,14 @@ function handleError(error, response) {
 //
 //  HELPERS
 //
-//********************************************************************* */ 
+//********************************************************************* */
 
 function getGalleries() {
   const SQL = `SELECT name FROM gallery ORDER BY name`;
   return client.query(SQL);
 }
+
+
 
 // *********************************************************************
 //
