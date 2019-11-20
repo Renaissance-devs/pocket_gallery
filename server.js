@@ -27,7 +27,7 @@ app.set('view engine', 'ejs');
 //
 //  DATA MODEL
 //
-//********************************************************************* */ 
+//********************************************************************* */
 
 function Art(info) {
   const placeholderImage = 'assets/placeholder.jpg';
@@ -168,7 +168,7 @@ function updateWork(request, response) {
 function deleteWork(request, response) {
   const values = [request.params.id];
   const SQL = `DELETE FROM works WHERE id=$1`;
-  client.query(SQL, values).then(_ => response.redirect('/')).catch((error, response) => handleError(error, response));
+  client.query(SQL, values).then( () => response.redirect('/')).catch((error, response) => handleError(error, response));
 }
 
 function createWork(request, response) {
@@ -200,7 +200,7 @@ function handleError(error, response) {
 //
 //  HELPERS
 //
-//********************************************************************* */ 
+//********************************************************************* */
 
 function getGalleries() {
   const SQL = `SELECT DISTINCT gallery FROM works ORDER BY gallery`;
