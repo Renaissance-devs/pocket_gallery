@@ -56,6 +56,7 @@ app.get('/', getArt);
 
 
 app.get('/searches', search);
+app.post('/gallery/:gallery', gallerySelect);
 app.post('/searches/results', searchResults);
 app.post('/works', createWork);
 app.get('/works/:id', getOneWork);
@@ -71,15 +72,20 @@ app.delete('/works/:id', deleteWork);
 //  ROUTE HANDLERS
 //
 //********************************************************************* */
+function gallerySelect(request, response) {
+  let SQL = `SELECT * FROM works WHERE gallery=$1`
+  const values = [request];
+  console.log(request);
 
+  return client.query(SQL, values)
+}
 
 function getArt(request, response) {
-  let SQL = 'SELECT * FROM works;';
+  let SQL = `SELECT * FROM works;`;
   return client.query(SQL)
-    .then(results => response.render('pages/index', {
-      result: results.rows,
-      count: results.rows.length
-    }))
+    .then(results => {
+      getGalleries().then(galleries => response.render('pages/index', {result: results.rows, count: results.rows.length, galleries: galleries.rows}))
+    })
     .catch(handleError);
 }
 
@@ -199,9 +205,9 @@ function handleError(error, response) {
   });
 }
 // *********************************************************************
-// 
+//
 //  HELPERS
-// 
+//
 //********************************************************************* */ 
 
 function getGalleries() {
