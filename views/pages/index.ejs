@@ -7,23 +7,33 @@
 </head>
 
 <body>
-    <%- include('../layouts/header') %>
+  <%- include('../layouts/header') %>
   <main>
-      <h4>Saved Works ( <%= count %> )  &mdash;  <a id="h4-a" href="/searches">Add to Your Gallery <i class="fas fa-search"></i></a></h4>
+
+    <h4>Saved Works (<%= count %>) &mdash; <a id="h4-a" href="/searches">Add to Your Gallery <i
+          class="fas fa-search"></i></a></h4>
+
     <section class="subhead">
-        
-        <h3>Select Gallery to View</h3>
-        <form action="/gallery" method="POST">
-          <select id="gallery-select" name="gallery">
-            <option value="all">All Galleries</option>
-            <% galleries.forEach(gallery => { %>
-            <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
-            <%})%>
-          </select>
-          <button type="submit">View Gallery</button>
-        </form>
+      <h3>Create a new Gallery</h3>
+      <form action="/gallery" method="POST">
+        <label for="gallery">New Gallery Name</label>
+        <input type="hidden" name="_method" value="PUT">
+        <input type="text" name="gallery" id="gallery">
+        <button type="submit">Submit</button>
+      </form>
+      <h3>Select Gallery to View</h3>
+      <form action="/gallery" method="POST">
+
+        <select id="gallery-select" name="gallery">
+          <option value="all">All Galleries</option>
+          <% galleries.forEach(gallery => { %>
+          <option value="<%= gallery.name %>"><%= gallery.name %></option>
+          <%})%>
+        </select>
+        <button type="submit">View Gallery</button>
+      </form>
     </section>
-    
+
     </select>
     <ul>
       <% result.forEach(art => { %>
@@ -31,9 +41,11 @@
         <section class="work-section">
           <img class="frame" src="<%= art.image_url ? art.image_url : 'assets/placeholder.jpg' %>" alt="image of painting">
           <h3><%= art.title %></h3>
-          <p><%= art.artist %></p>
-          <p>gallery > <%= art.gallery %></p>
-          <button onclick="window.location.href = '/works/<%= art.id %>';">View Details</button>
+
+          <span><%= art.artist %></span>
+          <p>Gallery -- <%= art.name %></p>
+          <button id="button-detail" onclick="window.location.href = '/works/<%= art.id %>';">View Details</button>
+
         </section>
       </li>
       <% }) %>
@@ -42,4 +54,5 @@
   <%- include('../layouts/footer') %>
 </body>
 <%- include ../layouts/scripts %>
+
 </html>
