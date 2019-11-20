@@ -29,12 +29,12 @@
         <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
         <%})%>
       </select>
-      <input type="submit" value="Update Gallery">
+      <input style="background-color:<%= colors[0] %>;<% if(colors[0].indexOf(1) < 7){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %>  type="submit" value="Update Gallery">
     </form>
     <br>
     <form action="/works/<%=work.id%>" method="POST">
       <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete this Work">
+      <input style="background-color:<%= colors[1] %>;" type="submit" value="Delete this Work">
     </form>
   </section>
  </main>
