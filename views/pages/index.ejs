@@ -10,7 +10,8 @@
   <%- include('../layouts/header') %>
   <main>
 
-      <h4><%= count %> Saved Works &mdash;  <a id="h4-a" href="/searches">Add to Your Gallery <i class="fas fa-search"></i></a></h4>
+    <h4><%= count %> Saved Works &mdash; <a id="h4-a" href="/searches">Add to Your Gallery <i
+          class="fas fa-search"></i></a></h4>
     <section class="subhead">
 
       <form action="/gallery" method="POST">
@@ -57,7 +58,7 @@
             alt="image of painting">
           <h3><%= art.title %></h3>
           <p><%= art.artist %></p>
-          <p>gallery > <%= art.gallery %></p>
+          <p>gallery > <%= art.name %></p>
           <button onclick="window.location.href = '/works/<%= art.id %>'">View Details</button>
         </section>
       </li>
