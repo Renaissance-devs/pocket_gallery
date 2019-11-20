@@ -53,8 +53,6 @@ app.use(methodOverride((request, response) => {
 }));
 
 app.get('/', getArt);
-
-
 app.get('/searches', search);
 app.post('/gallery', gallerySelect);
 app.post('/searches/results', searchResults);
@@ -73,10 +71,12 @@ app.delete('/works/:id', deleteWork);
 //
 //********************************************************************* */
 function gallerySelect(request, response) {
-  let SQL = `SELECT * FROM works WHERE gallery=$1`
+  if(request.body.gallery === 'all'){
+    response.redirect('/');
+  }
+  let SQL = `SELECT * FROM works WHERE gallery=$1;`;
   const values = [request.body.gallery];
   console.log(request.body.gallery);
-
   return client.query(SQL, values)
     .then(results => {
       console.log(results.rows);
