@@ -28,11 +28,12 @@
         <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
         <%})%>
       </select>
-      <input type="submit" value="Update Gallery">
+      <!-- <input type="submit" value="Update Gallery"> -->
+      <button type="submit">Update Gallery</button>
     </form>
     <form action="/works/<%=work.id%>" method="POST">
       <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete this Work">
+      <button onclick="window.location.href = '/'">Delete this Work</button>
     </form>
   </section>
  </main>

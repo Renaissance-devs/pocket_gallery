@@ -11,8 +11,6 @@
   <main>
       <h4><%= count %> Saved Works &mdash;  <a id="h4-a" href="/searches">Add to Your Gallery <i class="fas fa-search"></i></a></h4>
     <section class="subhead">
-        
-        <h3>Select Gallery to View</h3>
         <form action="/gallery" method="POST">
           <select id="gallery-select" name="gallery">
             <option value="all">All Galleries</option>
@@ -33,7 +31,7 @@
           <h3><%= art.title %></h3>
           <p><%= art.artist %></p>
           <p>gallery > <%= art.gallery %></p>
-          <button onclick="window.location.href = '/works/<%= art.id %>';">View Details</button>
+          <button onclick="window.location.href = '/works/<%= art.id %>'">View Details</button>
         </section>
       </li>
       <% }) %>
