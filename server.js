@@ -105,6 +105,8 @@ function getOneWork(request, response) {
     let SQL = `SELECT * FROM works WHERE id=$1`;
     const values = [request.params.id];
     return client.query(SQL, values).then(results => {
+      console.log(results.rows[0]);
+      getColors(results.rows[0].image_url);
       response.render('works/detail', {
         work: results.rows[0],
         galleries: galleries.rows
@@ -153,6 +155,13 @@ function searchResults(request, response) {
     .catch((error, response) => handleError(error, response));
 }
 
+function getColors(image_url){
+  let url = `https://api.imagga.com/v2/colors?image_url=${image_url}`
+  superagent.get(url)
+    .set('Authorization', `Basic ${process.env.COLOR_API_KEY}`)
+    .then(results => console.log(results.body.colors.image_colors))
+    .catch(err => console.error(err));
+}
 
 function updateWork(request, response) {
   const gallery = request.body.gallery;
@@ -182,7 +191,6 @@ function createWork(request, response) {
   console.log(request.body.image_url);
   let SQL = 'INSERT INTO works(artist, title, image_url, gallery, century) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
   let values = [artist, title, image_url, gallery, century];
-  // console.log(values);
   return client
     .query(SQL, values)
     .then(result => {
@@ -206,6 +214,8 @@ function getGalleries() {
   const SQL = `SELECT DISTINCT gallery FROM works ORDER BY gallery`;
   return client.query(SQL);
 }
+
+
 
 // *********************************************************************
 //
