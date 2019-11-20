@@ -31,6 +31,7 @@ app.set('view engine', 'ejs');
 
 function Art(info) {
   const placeholderImage = './public/assets/placeholder.jpg';
+
   this.artist = info.peoplecount > 0 ? info.people[0].name : 'No artist available';
   this.title = info.title || 'No title available';
   this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
@@ -53,8 +54,6 @@ app.use(methodOverride((request, response) => {
 }));
 
 app.get('/', getArt);
-
-
 app.get('/searches', search);
 app.post('/gallery', gallerySelect);
 app.post('/searches/results', searchResults);
@@ -62,9 +61,7 @@ app.post('/works', createWork);
 app.get('/works/:id', getOneWork);
 app.put('/works/:id', updateWork);
 app.delete('/works/:id', deleteWork);
-
-
-
+app.get('*', (request, response) => response.render('pages/error', { error: '404 Page Not Found' }));
 
 
 // *********************************************************************
@@ -94,7 +91,6 @@ function getArt(request, response) {
 }
 
 function getOneWork(request, response) {
-
   getGalleries().then(galleries => {
     // console.log(galleries);
     let SQL = `SELECT * FROM works WHERE id=$1`;
@@ -131,19 +127,18 @@ function searchResults(request, response) {
   let url = `https://api.harvardartmuseums.org/object?${param}=${search}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
   superagent.get(url)
     .then(apiResponse => {
-      if(apiResponse.body.info.totalrecords === 0){
+      if (apiResponse.body.info.totalrecords === 0) {
         response.render('searches/noResults');
-      }else {
+      } else {
         let works = apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult));
         getGalleries().then(galleries => response.render('searches/show', {works: works, galleries: galleries.rows}));
       }
     })
-    .catch(error => console.error(error));
+    .catch((error, response) => handleError(error, response));
 }
 
 
 function updateWork(request, response) {
-  console.log('update work');
   const gallery = request.body.gallery;
   const id = request.params.id;
   const values = [gallery, id];
@@ -151,17 +146,16 @@ function updateWork(request, response) {
 
   return client.query(SQL, values).then(results => {
     response.redirect(`/works/${id}`);
-  }).catch(error => console.error(error));
+  }).catch((error, response) => handleError(error, response));
 }
 
 function deleteWork(request, response) {
   const values = [request.params.id];
   const SQL = `DELETE FROM works WHERE id=$1`;
-  client.query(SQL, values).then(_ => response.redirect('/')).catch(error => handleError(error));
+  client.query(SQL, values).then(_ => response.redirect('/')).catch((error, response) => handleError(error, response));
 }
 
 function createWork(request, response) {
-
   let {
     artist,
     title,
@@ -169,8 +163,8 @@ function createWork(request, response) {
     gallery,
     century
   } = request.body;
-  let SQL =
-    'INSERT INTO works(artist, title, image_url, gallery, century) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
+
+  let SQL = 'INSERT INTO works(artist, title, image_url, gallery, century) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
   let values = [artist, title, image_url, gallery, century];
 
   return client
@@ -178,31 +172,9 @@ function createWork(request, response) {
     .then(result => {
       response.redirect(`/works/${result.rows[0].id}`);
     })
-    .catch(handleError);
+    .catch((error, response) => handleError(error, response));
 }
 
-function updateArt(request, response) {
-  let { artist, title, image_url, century, gallery } = request.body;
-
-  let SQL =
-    'UPDATE art_app SET artist=$1, title=$2, image_url=$3, century=$4, gallery=$5, WHERE id=$1;'; //Is the WHERE correct?
-
-  let values = [
-    artist,
-    title,
-    image_url,
-    century,
-    gallery,
-    request.params.id
-  ];
-
-  client
-    .query(SQL, values)
-    .then(response.redirect(`/works/${request.params.id}`))
-    .catch(handleError);
-}
-
-// Error Handler
 function handleError(error, response) {
   response.render('pages/error', {
     error: error
