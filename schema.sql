@@ -13,12 +13,8 @@ CREATE TABLE works (
   image_url VARCHAR(255),
   century VARCHAR(255),
   gallery_id INT,
-  CONSTRAINT fk_gallery FOREIGN KEY (gallery_id)  REFERENCES gallery(id)
+  CONSTRAINT fk_gallery FOREIGN KEY (gallery_id)  REFERENCES gallery(id) ON DELETE CASCADE
 );
-
--- ALTER TABLE works ADD 
-
-
 
 INSERT INTO gallery (name) VALUES ('landscapes');
 INSERT INTO gallery (name) VALUES ('portraits');

@@ -68,6 +68,7 @@ app.get('/', getArt);
 app.get('/searches', search);
 app.post('/gallery', gallerySelect);
 app.put('/gallery', createGallery);
+app.delete('/gallery', deleteGallery);
 app.post('/searches/results', searchResults);
 app.post('/works', createWork);
 app.get('/works/:id', getOneWork);
@@ -88,7 +89,6 @@ function gallerySelect(request, response) {
   if (request.body.gallery === 'all') {
     response.redirect('/');
   }
-  console.log();
 
   let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE name=$1`;
   const values = [request.body.gallery];
@@ -121,8 +121,7 @@ function getOneWork(request, response) {
     let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE works.id=$1`;
     const values = [request.params.id];
     return client.query(SQL, values).then(results => {
-      getColors(results.rows[0].image_url).then(colors =>{
-        console.log('getOneWork',colors)
+      getColors(results.rows[0].image_url).then(colors => {
         response.render('works/detail', {
           work: results.rows[0],
           galleries: galleries.rows,
@@ -133,6 +132,13 @@ function getOneWork(request, response) {
   });
 }
 
+function deleteGallery(request, response) {
+  const SQL = `DELETE FROM gallery WHERE name=$1`
+  const values = [request.body.gallery];
+  client.query(SQL, values).then(() => response.redirect('/'));
+}
+
+
 function search(request, response) {
   response.render('searches/new')
 }
@@ -140,7 +146,7 @@ function search(request, response) {
 function searchResults(request, response) {
   let param;
   let search;
-  if (request.body.search[1] === 'keyword'){
+  if (request.body.search[1] === 'keyword') {
     param = 'keyword';
     search = request.body.search[0];
   }
@@ -175,14 +181,14 @@ function searchResults(request, response) {
 
 }
 
-function getColors(image_url){
+function getColors(image_url) {
   let url = `https://api.imagga.com/v2/colors?image_url=${image_url}&extract_object_colors=0`
   return superagent.get(url)
     .set('Authorization', `Basic ${process.env.COLOR_API_KEY}`)
     .then(results => {
       let colorValues = []
       results.body.result.colors.image_colors.forEach(color => colorValues.push(color.closest_palette_color_html_code))
-      console.log('getColors', colorValues);
+
       return colorValues;
     })
     .catch(err => console.error(err));
@@ -234,6 +240,7 @@ function createWork(request, response) {
   const valuesGallery = [request.body.gallery];
 
   client.query(SQLgallery, valuesGallery).then(galleryId => {
+
     valuesWorks.push(galleryId.rows[0].id);
     client.query(SQLworks, valuesWorks)
       .then(result => response.redirect(`/works/${result.rows[0].id}`))

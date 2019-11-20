@@ -7,33 +7,36 @@
 </head>
 
 <body>
- <%- include('../layouts/header') %>
- <main>
-  <h4>Details</h4>  
-  <section class="work-section">
-    <img class="frame" style="background-color:<%= colors[2] %>;" src="<%= work.image_url ? work.image_url : '/assets/placeholder.jpg' %>">
-    <h3><%= work.title %></h3>
-    <p><%= work.artist %></p>
-    <p><%= work.century %></p>
-    <p>gallery > <%= work.gallery %></p>    
-    <form action="/works/<%=work.id%>" method="POST">
-      <input type="hidden" name="_method" value="PUT">
-      <input type="hidden" id="image_url" value="<%= work.image_url%>">
-      <input type="hidden" id="title" value="<%= work.title%>">
-      <input type="hidden" id="artist" value="<%= work.artist%>">
-      <input type="hidden" id="century" value="<%= work.century%>">
-      <select name="gallery" id="gallery">
-        <option value="none" selected>choose gallery</option>
-        <% galleries.forEach(gallery => { %>
-        <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
-        <%})%>
-      </select>
-      <!-- <input type="submit" value="Update Gallery"> -->
-      <button style="background-color:<%= colors[0] %>;<% if(parseInt(colors[0].indexOf(1)) < 7){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %> type=" submit">Update Gallery</button>
-    </form>
-    <form action="/works/<%=work.id%>" method="POST">
-      <input type="hidden" name="_method" value="DELETE">
-      <button style="background-color:<%= colors[1] %>;<% if(parseInt(colors[0].indexOf(1)) < 7){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %> onclick="window.location.href = '/'">Delete this Work</button>
+  <%- include('../layouts/header') %>
+  <main>
+    <h4>Details</h4>
+    <section class="work-section">
+      <img class="frame" style="background-color:<%= colors[2] %>;" src="<%= work.image_url ? work.image_url : '/assets/placeholder.jpg' %>">
+      <h3><%= work.title %></h3>
+      <p><%= work.artist %></p>
+      <p><%= work.century %></p>
+      <p>gallery > <%= work.name %></p>
+      <form action="/works/<%=work.id%>" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" id="image_url" value="<%= work.image_url%>">
+        <input type="hidden" id="title" value="<%= work.title%>">
+        <input type="hidden" id="artist" value="<%= work.artist%>">
+        <input type="hidden" id="century" value="<%= work.century%>">
+        <select name="gallery" id="gallery" required>
+          <option selected>Choose gallery</option>
+          <% galleries.forEach(gallery => { %>
+          <option value="<%= gallery.name %>"><%= gallery.name %></option>
+          <%})%>
+        </select>
+        <button
+          style="background-color:<%= colors[0] %>;<% if(parseInt(colors[0].indexOf(1)) < 7){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %> type="
+          submit">Update Gallery</button>
+      </form>
+      <form action="/works/<%=work.id%>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <button
+          style="background-color:<%= colors[1] %>;<% if(parseInt(colors[0].indexOf(1)) < 7){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %> onclick="
+          window.location.href='/'">Delete this Work</button>
     </form>
   </section>
  </main>
