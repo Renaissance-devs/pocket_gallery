@@ -61,7 +61,9 @@ app.post('/works', createWork);
 app.get('/works/:id', getOneWork);
 app.put('/works/:id', updateWork);
 app.delete('/works/:id', deleteWork);
-app.get('*', (request, response) => response.render('pages/error', { error: '404 Page Not Found' }));
+app.get('*', (request, response) => response.render('pages/error', {
+  error: '404 Page Not Found'
+}));
 
 
 // *********************************************************************
@@ -70,14 +72,18 @@ app.get('*', (request, response) => response.render('pages/error', { error: '404
 //
 //********************************************************************* */
 function gallerySelect(request, response) {
-  if(request.body.gallery === 'all'){
+  if (request.body.gallery === 'all') {
     response.redirect('/');
   }
   let SQL = `SELECT * FROM works WHERE gallery=$1;`;
   const values = [request.body.gallery];
   return client.query(SQL, values)
     .then(results => {
-      getGalleries().then(galleries => response.render('pages/index', {result: results.rows, count: results.rows.length, galleries: galleries.rows}))
+      getGalleries().then(galleries => response.render('pages/index', {
+        result: results.rows,
+        count: results.rows.length,
+        galleries: galleries.rows
+      }))
     })
 }
 
@@ -85,7 +91,11 @@ function getArt(request, response) {
   let SQL = `SELECT * FROM works;`;
   return client.query(SQL)
     .then(results => {
-      getGalleries().then(galleries => response.render('pages/index', {result: results.rows, count: results.rows.length, galleries: galleries.rows}))
+      getGalleries().then(galleries => response.render('pages/index', {
+        result: results.rows,
+        count: results.rows.length,
+        galleries: galleries.rows
+      }))
     })
     .catch(handleError);
 }
@@ -169,10 +179,10 @@ function createWork(request, response) {
     gallery,
     century
   } = request.body;
-
+  console.log(request.body.image_url);
   let SQL = 'INSERT INTO works(artist, title, image_url, gallery, century) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
   let values = [artist, title, image_url, gallery, century];
-
+  // console.log(values);
   return client
     .query(SQL, values)
     .then(result => {
