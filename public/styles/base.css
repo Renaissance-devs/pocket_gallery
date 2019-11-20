@@ -20,6 +20,11 @@ h1 {
   font-size: 2.5em;
 }
 
+p {
+  width: 90%;
+  margin: 0 auto;
+}
+
 a {
   text-decoration: none;
   color: white;
@@ -92,8 +97,9 @@ footer {
 }
 
 #error-p {
-  margin: 30px;
-  font-size: 2em;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.5em;
 }
 
 #scream {
@@ -110,11 +116,11 @@ footer {
   line-height: 2em;
 }
 
-#work-section {
+.work-section {
   line-height: 2em;
 }
 
-#button-detail, #search-button {
+button {
   margin-top: 10px;
   padding: 10px;
   background-color: #d1ab90;
@@ -124,7 +130,7 @@ footer {
   border-radius: 5px;
 }
 
-#button-detail:hover {
+button:hover {
   background-color: #847577;
   color: white;
 }
@@ -133,6 +139,8 @@ footer {
 
 h3 {
   font-style: italic;
+  width: 90%;
+  margin: 0 auto;
 }
 
 h4 {
@@ -151,4 +159,14 @@ h4 {
 #search-form {
   margin-top: 30px;
   line-height: 1.8em;
+}
+
+#form-search {
+  line-height: 2.5em;
+  margin: 30px;
+}
+
+form {
+  margin-top: 15px;
+  margin-bottom: 30px;
 }
