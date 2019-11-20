@@ -25,7 +25,7 @@
             <input type="hidden" name="image_url" id="image_url" value="<%= work.image_url %>">
             <select name="gallery" id="gallery">
               <% galleries.forEach(gallery => { %>
-              <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
+              <option value="<%= gallery.name %>"><%= gallery.name %></option>
               <%})%>
             </select>
             <button type="submit">Save to Gallery</button>

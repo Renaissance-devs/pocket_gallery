@@ -7,38 +7,39 @@
 </head>
 
 <body>
- <%- include('../layouts/header') %>
- <main>
-  <h4>Details</h4>  
-  <section  >
-    <img src="<%= work.image_url %>">
-    <p>Title: <%= work.title %></p>
-    <p>Artist: <%= work.artist %></p>
-    <p>Century: <%= work.century %></p>
-    <p>Gallery: <%= work.gallery %></p>
-    <br>
-    
-    <form action="/works/<%=work.id%>" method="POST">
-      <input type="hidden" name="_method" value="PUT">
-      <input type="hidden" id="image_url" value="<%= work.image_url%>">
-      <input type="hidden" id="title" value="<%= work.title%>">
-      <input type="hidden" id="artist" value="<%= work.artist%>">
-      <input type="hidden" id="century" value="<%= work.century%>">
-      <select name="gallery" id="gallery">
-        <% galleries.forEach(gallery => { %>
-        <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
-        <%})%>
-      </select>
-      <input type="submit" value="Update Gallery">
-    </form>
-    <br>
-    <form action="/works/<%=work.id%>" method="POST">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete this Work">
-    </form>
-  </section>
- </main>
- <%- include('../layouts/footer') %>
+  <%- include('../layouts/header') %>
+  <main>
+    <h4>Details</h4>
+    <section>
+      <img src="<%= work.image_url %>">
+      <p>Title -- <%= work.title %></p>
+      <p>Artist -- <%= work.artist %></p>
+      <p>Century -- <%= work.century %></p>
+      <p>Gallery -- <%= work.name %></p>
+      <br>
+
+      <form action="/works/<%=work.id%>" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" id="image_url" value="<%= work.image_url%>">
+        <input type="hidden" id="title" value="<%= work.title%>">
+        <input type="hidden" id="artist" value="<%= work.artist%>">
+        <input type="hidden" id="century" value="<%= work.century%>">
+        <select name="gallery" id="gallery">
+          <% galleries.forEach(gallery => { %>
+          <option value="<%= gallery.name %>"><%= gallery.name %></option>
+          <%})%>
+        </select>
+        <input type="submit" value="Update Gallery">
+      </form>
+      <br>
+      <form action="/works/<%=work.id%>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete this Work">
+      </form>
+    </section>
+  </main>
+  <%- include('../layouts/footer') %>
 </body>
 <%- include ../layouts/scripts %>
+
 </html>
