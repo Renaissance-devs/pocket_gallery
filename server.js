@@ -156,10 +156,14 @@ function searchResults(request, response) {
 }
 
 function getColors(image_url){
-  let url = `https://api.imagga.com/v2/colors?image_url=${image_url}`
+  let url = `https://api.imagga.com/v2/colors?image_url=${image_url}&extract_object_colors=0`
   superagent.get(url)
     .set('Authorization', `Basic ${process.env.COLOR_API_KEY}`)
-    .then(results => console.log(results.body.colors.image_colors))
+    .then(results => {
+      let colorValues = []
+      results.body.result.colors.image_colors.forEach(color => colorValues.push(color.closest_palette_color_html_code))
+      console.log(colorValues);
+    })
     .catch(err => console.error(err));
 }
 
