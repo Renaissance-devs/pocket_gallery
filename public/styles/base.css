@@ -110,11 +110,11 @@ footer {
   line-height: 2em;
 }
 
-#work-section {
+.work-section {
   line-height: 2em;
 }
 
-#button-detail, #search-button {
+.button-detail, .search-button {
   margin-top: 10px;
   padding: 10px;
   background-color: #d1ab90;
@@ -124,7 +124,7 @@ footer {
   border-radius: 5px;
 }
 
-#button-detail:hover {
+.button-detail:hover {
   background-color: #847577;
   color: white;
 }
@@ -151,4 +151,9 @@ h4 {
 #search-form {
   margin-top: 30px;
   line-height: 1.8em;
+}
+
+#form-search {
+  line-height: 2.5em;
+  margin: 30px;
 }

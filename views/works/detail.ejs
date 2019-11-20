@@ -10,12 +10,12 @@
  <%- include('../layouts/header') %>
  <main>
   <h4>Details</h4>  
-  <section  >
-    <img src="<%= work.image_url ? work.image_url : '/assets/placeholder.jpg' %>">
-    <p>Title: <%= work.title %></p>
-    <p>Artist: <%= work.artist %></p>
-    <p>Century: <%= work.century %></p>
-    <p>Gallery: <%= work.gallery %></p>
+  <section class="work-section">
+    <img class="frame" src="<%= work.image_url ? work.image_url : '/assets/placeholder.jpg' %>">
+    <h3><%= work.title %></h3>
+    <p><%= work.artist %></p>
+    <p><%= work.century %></p>
+    <p>gallery > <%= work.gallery %></p>
     <br>
     
     <form action="/works/<%=work.id%>" method="POST">

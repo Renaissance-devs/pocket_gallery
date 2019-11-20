@@ -28,17 +28,12 @@
     <ul>
       <% result.forEach(art => { %>
       <li class="art-items" data-work-id="<%= art.id %>">
-        <section id="work-section">
+        <section class="work-section">
           <img class="frame" src="<%= art.image_url ? art.image_url : 'assets/placeholder.jpg' %>" alt="image of painting">
           <h3><%= art.title %></h3>
-          <span><%= art.artist %></span>
-          <p>
-            <% if (art.gallery) { %>
-            gallery >
-            <%= art.gallery %>
-            <% } %>
-          </p>
-          <button id="button-detail" onclick="window.location.href = '/works/<%= art.id %>';">View Details</button>
+          <p><%= art.artist %></p>
+          <p>gallery > <%= art.gallery %></p>
+          <button class="button-detail" onclick="window.location.href = '/works/<%= art.id %>';">View Details</button>
         </section>
       </li>
       <% }) %>
