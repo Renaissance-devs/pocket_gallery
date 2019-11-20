@@ -70,10 +70,12 @@ app.get('*', (request, response) => response.render('pages/error', { error: '404
 //
 //********************************************************************* */
 function gallerySelect(request, response) {
-  let SQL = `SELECT * FROM works WHERE gallery=$1`
+  if(request.body.gallery === 'all'){
+    response.redirect('/');
+  }
+  let SQL = `SELECT * FROM works WHERE gallery=$1;`;
   const values = [request.body.gallery];
   console.log(request.body.gallery);
-
   return client.query(SQL, values)
     .then(results => {
       console.log(results.rows);
