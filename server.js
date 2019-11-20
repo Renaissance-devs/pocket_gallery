@@ -3,6 +3,7 @@
 // Application Dependencies
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
@@ -22,12 +23,13 @@ app.use(
 );
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+app.use(cors());
 
 // *********************************************************************
 //
 //  DATA MODEL
 //
-//********************************************************************* */ 
+//********************************************************************* */
 
 function Art(info) {
   const placeholderImage = 'assets/placeholder.jpg';
@@ -145,14 +147,14 @@ function searchResults(request, response) {
       if (apiResponse.body.info.totalrecords === 0) {
         response.render('searches/noResults');
       } else {
-        let works = apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult));
+        let works = apiResponse.body.records.filter(work => work.images ? work.images.length >= 1 : false).map(artResult => new Art(artResult));
         getGalleries().then(galleries => response.render('searches/show', {
           works: works,
           galleries: galleries.rows
         }));
       }
     })
-    .catch((error, response) => handleError(error, response));
+    .catch(err => console.error(err))
 }
 
 function getColors(image_url){
@@ -181,7 +183,7 @@ function updateWork(request, response) {
 function deleteWork(request, response) {
   const values = [request.params.id];
   const SQL = `DELETE FROM works WHERE id=$1`;
-  client.query(SQL, values).then(_ => response.redirect('/')).catch((error, response) => handleError(error, response));
+  client.query(SQL, values).then( () => response.redirect('/')).catch((error, response) => handleError(error, response));
 }
 
 function createWork(request, response) {
@@ -212,7 +214,7 @@ function handleError(error, response) {
 //
 //  HELPERS
 //
-//********************************************************************* */ 
+//********************************************************************* */
 
 function getGalleries() {
   const SQL = `SELECT DISTINCT gallery FROM works ORDER BY gallery`;
