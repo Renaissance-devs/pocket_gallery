@@ -3,6 +3,7 @@
 // Application Dependencies
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
@@ -22,6 +23,7 @@ app.use(
 );
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+app.use(cors());
 
 // *********************************************************************
 //
