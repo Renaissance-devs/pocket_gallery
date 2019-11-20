@@ -12,7 +12,7 @@
   <main>
     <h4>Saved Works (<%= count %>)</h4>
     <h3>Select Gallery to View</h3>
-    <form action="" method="">
+    <form action="/gallery" method="POST">
       <select id="gallery-select" name="gallery">
         <option value="*">All Galleries</option>
         <% galleries.forEach(gallery => { %>

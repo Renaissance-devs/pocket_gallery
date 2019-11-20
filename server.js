@@ -56,7 +56,7 @@ app.get('/', getArt);
 
 
 app.get('/searches', search);
-app.post('/gallery/:gallery', gallerySelect);
+app.post('/gallery', gallerySelect);
 app.post('/searches/results', searchResults);
 app.post('/works', createWork);
 app.get('/works/:id', getOneWork);
@@ -74,10 +74,14 @@ app.delete('/works/:id', deleteWork);
 //********************************************************************* */
 function gallerySelect(request, response) {
   let SQL = `SELECT * FROM works WHERE gallery=$1`
-  const values = [request];
-  console.log(request);
+  const values = [request.body.gallery];
+  console.log(request.body.gallery);
 
   return client.query(SQL, values)
+    .then(results => {
+      console.log(results.rows);
+      getGalleries().then(galleries => response.render('pages/index', {result: results.rows, count: results.rows.length, galleries: galleries.rows}))
+    })
 }
 
 function getArt(request, response) {
