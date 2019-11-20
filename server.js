@@ -77,10 +77,8 @@ function gallerySelect(request, response) {
   }
   let SQL = `SELECT * FROM works WHERE gallery=$1;`;
   const values = [request.body.gallery];
-  console.log(request.body.gallery);
   return client.query(SQL, values)
     .then(results => {
-      console.log(results.rows);
       getGalleries().then(galleries => response.render('pages/index', {
         result: results.rows,
         count: results.rows.length,
@@ -121,8 +119,12 @@ function search(request, response) {
 }
 
 function searchResults(request, response) {
-  let param = 'q';
-  let search = request.body.search;
+  let param;
+  let search;
+  if (request.body.search[1] === 'keyword'){
+    param = 'keyword';
+    search = request.body.search[0];
+  }
   if (request.body.search[1] === 'title') {
     param = 'title';
     search = request.body.search[0];

@@ -7,13 +7,14 @@
 <body>
   <%- include('../layouts/header') %>
   <main>
-    <h4>Search by Artist, Title, or Color</h4>
-    <form id="search-form" action="/searches/results" method="POST">
-      keyword: <input type="text" default="Enter you search" name="search"><br>
-      search by artist (e.g. monet): <input type="radio" name="search" value="artist"> <br>
-      search by title of work (e.g. flowers): <input type="radio" name="search" value="title"> <br>
-      search by main color (e.g. blue): <input type="radio" name="search" value="color"> <br>
-      <button id="search-button" type="submit">Search</button>
+    <h2>Search by Artist, Title, or Color</h2>
+    <form action="/searches/results" method="POST">
+      Search: <input type="text" default="Enter you search" name="search"><br>
+      Search By Keyword: <input type="radio" name="search" value="keyword" checked> <br>
+      Search By Artist: <input type="radio" name="search" value="artist"> <br>
+      Search By Title: <input type="radio" name="search" value="title"> <br>
+      Main Color: <input type="radio" name="search" value="color"> <br>
+      <button type="submit">Search for a Work</button>
     </form>
   </main>
   <%- include('../layouts/footer') %>
