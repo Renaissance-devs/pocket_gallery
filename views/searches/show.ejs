@@ -9,14 +9,14 @@
 <body>
   <%- include ../layouts/header %>
   <main>
+    <h4>Search Results</h4>
     <section>
       <ul>
         <% works.forEach(work => { %>
-        <li>
+        <li class="work-section">
           <img src="<%= work.image_url ? work.image_url : 'assets/placeholder.jpg'%>">
-          <p>Title: <%= work.title %></p>
-          <p>Artist: <%= work.artist %></p>
-          <p>Century: <%= work.century %></p>
+          <h3><%= work.title %></h3>
+          <p><%= work.artist %></p>
 
           <form action="/works" method="POST">
             <input type="hidden" name="title" id="title" value="<%= work.title %>">
@@ -24,6 +24,7 @@
             <input type="hidden" name="century" id="century" value="<%= work.century %>">
             <input type="hidden" name="image_url" id="image_url" value="<%= work.image_url %>">
             <select name="gallery" id="gallery">
+              <option value="none" selected>choose gallery</option>
               <% galleries.forEach(gallery => { %>
               <option value="<%= gallery.name %>"><%= gallery.name %></option>
               <%})%>
