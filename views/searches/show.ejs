@@ -23,8 +23,8 @@
             <input type="hidden" name="artist" id="artist" value="<%= work.artist %>">
             <input type="hidden" name="century" id="century" value="<%= work.century %>">
             <input type="hidden" name="image_url" id="image_url" value="<%= work.image_url %>">
-            <select name="gallery" id="gallery">
-              <option value="none" selected>choose gallery</option>
+            <select name="gallery" id="gallery" required>
+              <option value="">choose gallery</option>
               <% galleries.forEach(gallery => { %>
               <option value="<%= gallery.name %>"><%= gallery.name %></option>
               <%})%>

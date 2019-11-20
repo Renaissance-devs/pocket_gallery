@@ -121,8 +121,7 @@ function getOneWork(request, response) {
     let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE works.id=$1`;
     const values = [request.params.id];
     return client.query(SQL, values).then(results => {
-      getColors(results.rows[0].image_url).then(colors =>{
-        console.log('getOneWork',colors)
+      getColors(results.rows[0].image_url).then(colors => {
         response.render('works/detail', {
           work: results.rows[0],
           galleries: galleries.rows,
@@ -189,7 +188,7 @@ function getColors(image_url) {
     .then(results => {
       let colorValues = []
       results.body.result.colors.image_colors.forEach(color => colorValues.push(color.closest_palette_color_html_code))
-      console.log('getColors', colorValues);
+
       return colorValues;
     })
     .catch(err => console.error(err));
@@ -241,6 +240,7 @@ function createWork(request, response) {
   const valuesGallery = [request.body.gallery];
 
   client.query(SQLgallery, valuesGallery).then(galleryId => {
+
     valuesWorks.push(galleryId.rows[0].id);
     client.query(SQLworks, valuesWorks)
       .then(result => response.redirect(`/works/${result.rows[0].id}`))
