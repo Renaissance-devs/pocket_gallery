@@ -134,7 +134,10 @@ function searchResults(request, response) {
         response.render('searches/noResults');
       } else {
         let works = apiResponse.body.records.filter(work => work.images.length >= 1).map(artResult => new Art(artResult));
-        getGalleries().then(galleries => response.render('searches/show', {works: works, galleries: galleries.rows}));
+        getGalleries().then(galleries => response.render('searches/show', {
+          works: works,
+          galleries: galleries.rows
+        }));
       }
     })
     .catch((error, response) => handleError(error, response));

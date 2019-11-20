@@ -9,33 +9,36 @@
 <body>
     <%- include('../layouts/header') %>
   <main>
-    <h4>Saved Works (<%= count %>)</h4>
-    <h3>Select Gallery to View</h3>
-    <form action="/gallery" method="POST">
-      <select id="gallery-select" name="gallery">
-        <option value="all">All Galleries</option>
-        <% galleries.forEach(gallery => { %>
-        <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
-        <%})%>
-      </select>
-      <button type="submit">View Gallery</button>
-    </form>
-
+      <h4>Saved Works (<%= count %>)  &mdash;  <a id="h4-a" href="/searches">Add to Your Gallery <i class="fas fa-search"></i></a></h4>
+    <section class="subhead">
+        
+        <h3>Select Gallery to View</h3>
+        <form action="/gallery" method="POST">
+          <select id="gallery-select" name="gallery">
+            <option value="all">All Galleries</option>
+            <% galleries.forEach(gallery => { %>
+            <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
+            <%})%>
+          </select>
+          <button type="submit">View Gallery</button>
+        </form>
+    </section>
+    
     </select>
     <ul>
       <% result.forEach(art => { %>
       <li class="art-items" data-work-id="<%= art.id %>">
-        <section class="art-container detail-view">
-          <img src="<%= art.image_url %>" alt="image of artwork">
+        <section id="work-section">
+          <img class="frame" src="<%= art.image_url %>" alt="image of painting">
           <h3><%= art.title %></h3>
           <span><%= art.artist %></span>
           <p>
             <% if (art.gallery) { %>
-            Gallery:
+            gallery >
             <%= art.gallery %>
             <% } %>
           </p>
-          <p class="detail-button"><a id="details-a" href="/works/<%= art.id %>">View Details</a></p>
+          <button id="button-detail" onclick="window.location.href = '/works/<%= art.id %>';">View Details</button>
         </section>
       </li>
       <% }) %>

@@ -17,10 +17,15 @@
           <p>Title: <%= work.title %></p>
           <p>Artist: <%= work.artist %></p>
           <p>Century: <%= work.century %></p>
-          <button class="select-button">Select this Work</button>
-          <section class="hide-me" id="hidden-form">
-            <%- include('../layouts/form', { formAction: 'POST', work: work}) %>
-          </section>
+
+          <form action="/works" method="POST">
+            <select name="gallery" id="gallery">
+              <% galleries.forEach(gallery => { %>
+              <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
+              <%})%>
+            </select>
+            <button type="submit">Save to Gallery</button>
+          </form>
         </li>
         <%})%>
       </ul>
@@ -28,5 +33,11 @@
   </main>
   <%- include ../layouts/footer %>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
+
 <%- include ../layouts/scripts %>
+
 </html>
