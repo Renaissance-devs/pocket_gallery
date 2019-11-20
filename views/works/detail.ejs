@@ -15,9 +15,7 @@
     <h3><%= work.title %></h3>
     <p><%= work.artist %></p>
     <p><%= work.century %></p>
-    <p>gallery > <%= work.gallery %></p>
-    <br>
-    
+    <p>gallery > <%= work.gallery %></p>    
     <form action="/works/<%=work.id%>" method="POST">
       <input type="hidden" name="_method" value="PUT">
       <input type="hidden" id="image_url" value="<%= work.image_url%>">
@@ -25,13 +23,13 @@
       <input type="hidden" id="artist" value="<%= work.artist%>">
       <input type="hidden" id="century" value="<%= work.century%>">
       <select name="gallery" id="gallery">
+        <option value="none" selected>choose gallery</option>
         <% galleries.forEach(gallery => { %>
         <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
         <%})%>
       </select>
       <input type="submit" value="Update Gallery">
     </form>
-    <br>
     <form action="/works/<%=work.id%>" method="POST">
       <input type="hidden" name="_method" value="DELETE">
       <input type="submit" value="Delete this Work">

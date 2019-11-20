@@ -20,6 +20,11 @@ h1 {
   font-size: 2.5em;
 }
 
+p {
+  width: 90%;
+  margin: 0 auto;
+}
+
 a {
   text-decoration: none;
   color: white;
@@ -92,8 +97,9 @@ footer {
 }
 
 #error-p {
-  margin: 30px;
-  font-size: 2em;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.5em;
 }
 
 #scream {
@@ -133,6 +139,8 @@ button:hover {
 
 h3 {
   font-style: italic;
+  width: 90%;
+  margin: 0 auto;
 }
 
 h4 {
@@ -156,4 +164,9 @@ h4 {
 #form-search {
   line-height: 2.5em;
   margin: 30px;
+}
+
+form {
+  margin-top: 15px;
+  margin-bottom: 30px;
 }
