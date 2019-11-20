@@ -26,7 +26,7 @@
             <select name="gallery" id="gallery">
               <option value="none" selected>choose gallery</option>
               <% galleries.forEach(gallery => { %>
-              <option value="<%= gallery.gallery %>"><%= gallery.gallery %></option>
+              <option value="<%= gallery.name %>"><%= gallery.name %></option>
               <%})%>
             </select>
             <button type="submit">Save to Gallery</button>
