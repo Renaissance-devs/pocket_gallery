@@ -8,6 +8,7 @@
 
 <body>
   <%- include('../layouts/header') %>
+  
   <main>
     <h4><%= count %> Saved Works &mdash; <a id="h4-a" href="/searches">Add to Your Gallery <i
           class="fas fa-search"></i></a></h4>
@@ -24,8 +25,6 @@
       <button onclick="window.location.href = '/galleries'">Manage Galleries</button>
     </section>
 
-
-    </select>
     <ul>
       <% result.forEach(art => { %>
       <li class="art-items" data-work-id="<%= art.id %>">

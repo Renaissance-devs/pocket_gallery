@@ -1,0 +1,13 @@
+ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+li {
+  width: 47%;
+}
+
+#img-detail {
+  width: 70%;
+}

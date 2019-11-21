@@ -1,3 +1,26 @@
 #menuToggle {
   visibility: hidden;
 }
+
+li {
+  width: 33%;
+}
+
+#nav-desktop {
+  display: unset;
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+
+header {
+  padding: 5px;
+}
+
+#nav-desktop li {
+  margin-top: 10px;
+  padding: 15px;
+}
+
+#scream {
+  width: 30%;
+}
