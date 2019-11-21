@@ -74,6 +74,7 @@ app.post('/works', createWork);
 app.get('/works/:id', getOneWork);
 app.put('/works/:id', updateWork);
 app.delete('/works/:id', deleteWork);
+app.get('/galleries', manageGalleries);
 
 app.get('*', (request, response) => response.render('pages/error', {
   error: '404 Page Not Found'
@@ -194,34 +195,23 @@ function getColors(image_url) {
     .catch(err => console.error(err));
 }
 
-
-
-
-
 function updateWork(request, response) {
   const gallery = request.body.gallery;
   const id = request.params.id;
-
-
-
   const galleryQuery = `SELECT id FROM gallery WHERE name=$1`;
   const galleryValues = [gallery];
-
   client.query(galleryQuery, galleryValues).then(galleryId => {
     const values = [galleryId.rows[0].id, id];
     let SQL = `UPDATE works SET gallery_id=$1 WHERE id=$2 RETURNING *`;
     return client.query(SQL, values)
       .then(() => response.redirect(`/works/${id}`))
   }).catch(error => console.error(error.error));
-
 }
 
 function deleteWork(request, response) {
   const values = [request.params.id];
   const SQL = `DELETE FROM works WHERE id=$1`;
-
   client.query(SQL, values).then(() => response.redirect('/')).catch((error, response) => handleError(error, response));
-
 }
 
 function createWork(request, response) {
@@ -252,7 +242,12 @@ function createGallery(request, response) {
   const values = [request.body.gallery];
   const SQL = `INSERT INTO gallery(name) VALUES ($1)`;
   client.query(SQL, values).then(() => response.redirect('/'));
+}
 
+function manageGalleries(request, response) {
+  getGalleries().then(galleries => {
+    response.render('pages/galleries', {galleries: galleries.rows});
+  })
 }
 
 function handleError(error, response) {

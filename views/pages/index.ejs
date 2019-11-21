@@ -9,36 +9,10 @@
 <body>
   <%- include('../layouts/header') %>
   <main>
-
     <h4><%= count %> Saved Works &mdash; <a id="h4-a" href="/searches">Add to Your Gallery <i
           class="fas fa-search"></i></a></h4>
     <section class="subhead">
-
-      <form action="/gallery" method="POST">
-        <h3>Create a new Gallery</h3>
-        <label for="gallery">New Gallery Name</label>
-        <input type="hidden" name="_method" value="PUT">
-        <input type="text" name="gallery" id="gallery">
-        <button type="submit">Create</button>
-      </form>
-
-
-      <form action="/gallery" method="post">
-        <h3>Delete a Gallery</h3>
-        <input type="hidden" name="_method" value="delete">
-        <label for="gallery">Delete Gallery</label>
-        <select name="gallery" id="gallery">
-          <% galleries.forEach(gallery => { %>
-          <option value="<%= gallery.name %>"><%= gallery.name %></option>
-          <%})%>
-        </select>
-        <button type="submit">Delete</button>
-      </form>
-
-
-      <h3>Select Gallery to View</h3>
-      <form action="/gallery" method="POST">
-
+      <form id="index-form" action="/gallery" method="POST">
         <select id="gallery-select" name="gallery">
           <option value="all">All Galleries</option>
           <% galleries.forEach(gallery => { %>
@@ -47,7 +21,9 @@
         </select>
         <button type="submit">View Gallery</button>
       </form>
+      <button onclick="window.location.href = '/galleries'">Manage Galleries</button>
     </section>
+
 
     </select>
     <ul>

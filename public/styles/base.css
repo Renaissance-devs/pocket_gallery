@@ -126,7 +126,6 @@ button {
   background-color: #d1ab90;
   font-size: .8em;
   font-family: 'Comfortaa', cursive;
-  /* font-weight: 700; */
   border-radius: 5px;
 }
 
@@ -134,8 +133,6 @@ button:hover {
   background-color: #847577;
   color: white;
 }
-
-
 
 h3 {
   font-style: italic;
@@ -169,4 +166,8 @@ h4 {
 form {
   margin-top: 15px;
   margin-bottom: 30px;
+}
+
+#index-form {
+  margin-bottom: 5px;
 }
