@@ -176,7 +176,7 @@ select option {
 /* BACKGROUND IMAGE ON ABOUT US PAGE */
 
 .backgroundimage {
-  background-image: url(/styles/public/assets/spotlights.jpg);
+  background-image: url(../assets/spotlights.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   border-image-width: 100%;
