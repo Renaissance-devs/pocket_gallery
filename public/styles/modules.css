@@ -12,7 +12,7 @@ img {
 }
 
 .frame {
-  background-color:#cfd2cd;
+  background-color: #D3D4D6;
   border:solid 25px #eee;
   border-bottom-color:#fff;
   border-left-color:#eee;
@@ -172,11 +172,3 @@ select option {
   padding: 8px;
 }
 
-/* BACKGROUND IMAGE ON ABOUT US PAGE */
-
-.backgroundimage {
-  background-image: url(../assets/spotlights.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-image-width: 100%;
-}

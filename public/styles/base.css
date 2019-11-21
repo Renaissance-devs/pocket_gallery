@@ -97,8 +97,12 @@ h3 {
 }
 
 h4 {
-  background: #cfd2cd;
+  background: #D3D4D6;
   padding: 15px;
+}
+
+.backgroundimage h4 {
+  background: none;
 }
 
 #h4-a {
