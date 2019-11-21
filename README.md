@@ -2,8 +2,11 @@
 
 ---
 
-## Version
-11/21/2019 9:03am version 1.0.0
+## Deployed App
+
+www.pocketgallery.art
+
+---
 
 ## Group Members
 
@@ -24,13 +27,12 @@ People like art from a variety of artists, time periods, etc but there is no way
 
 We aim to allow users to search through a collection of art to pick pieces to be put into custom galleries.
 
-## Getting Started
-
 ## Frameworks, APIs and Libraries
 
 This project utilizes the Harvard Art Mueseums API https://github.com/harvardartmuseums/api-docs
 
 ## Change Log & Version
+11/21/2019 9:03am version 1.0.0
 
 ## User Stories
 
@@ -44,8 +46,28 @@ https://docs.google.com/document/d/1GI_ycft2kEVggTB85nXQ73HPVkbyn3MzfyVAP73coe0/
 
 https://github.com/Renaissance-devs/pocket_gallery/blob/master/project_docs/group_agreement.md
 
-## Feature and time estimates
+## Credits
 
-## Photo Credits
+### Photos, Icons, and Styling
 
-Placeholder Image: <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@kadircelep?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Kadir Celep"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Kadir Celep</span></a>
+Placeholder Image: Kadir Celep - https://unsplash.com/photos/PbEzsnNLcA4
+
+Matted Frame Style - https://codepen.io/chris22smith/pen/PbBwjp
+
+Hamburger Icon - https://unsplash.com/photos/PbEzsnNLcA4
+
+Dropdown Menus Style - https://css-tricks.com/styling-a-select-like-its-2019/
+
+Social Media & Magnifing Glass - https://www.flaticon.com/
+
+### API
+
+Harvard Art Museum - https://www.harvardartmuseums.org/collections/api
+
+Imagga - https://imagga.com/
+
+### Photo Manipulator
+
+About Us Photos - http://goart.fotor.com/
+
+
