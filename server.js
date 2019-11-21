@@ -103,7 +103,7 @@ function gallerySelect(request, response) {
 }
 
 function getArt(request, response) {
-  let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id`;
+  let SQL = `SELECT works.artist, works.title, works.image_url, works.id, gallery.name FROM works JOIN gallery ON works.gallery_id=gallery.id`;
   return client.query(SQL)
     .then(results => {
       getGalleries().then(galleries => response.render('pages/index', {
@@ -117,7 +117,7 @@ function getArt(request, response) {
 
 function getOneWork(request, response) {
   getGalleries().then(galleries => {
-    let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE works.id=$1`;
+    let SQL = `SELECT works.artist, works.title, works.image_url, works.id, gallery.name FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE works.id=$1`;
     const values = [request.params.id];
     return client.query(SQL, values).then(results => {
       getColors(results.rows[0].image_url).then(colors => {
@@ -136,7 +136,6 @@ function deleteGallery(request, response) {
   const values = [request.body.gallery];
   client.query(SQL, values).then(() => response.redirect('/'));
 }
-
 
 function search(request, response) {
   response.render('searches/new')
@@ -178,7 +177,6 @@ function searchResults(request, response) {
         })
       }
     });
-
 }
 
 function getColors(image_url) {
