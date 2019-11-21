@@ -76,13 +76,11 @@ footer {
   color: black;
 }
 
-
-
 button {
   margin-top: 10px;
   padding: 10px;
   background-color: #d1ab90;
-  font-size: .8em;
+  font-size: 0.8em;
   font-family: 'Comfortaa', cursive;
   border-radius: 5px;
 }
@@ -109,4 +107,16 @@ h4 {
 
 .fas {
   color: #847577;
+}
+
+#pocket {
+  letter-spacing: 0.05em;
+}
+
+#gallery {
+  font-size: 380%;
+}
+
+.li-about {
+  margin-top: 14%;
 }
