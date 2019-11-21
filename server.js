@@ -42,10 +42,7 @@ function Art(info, gallery) {
   this.gallery = gallery;
 }
 
-function Gallery(gallery) {
-  this.name = gallery.name;
 
-}
 
 
 // *********************************************************************
@@ -89,7 +86,7 @@ function gallerySelect(request, response) {
     response.redirect('/');
   }
 
-  let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE name=$1`;
+  let SQL = `SELECT works.artist, works.title, works.image_url, works.id, gallery.name FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE name=$1`;
   const values = [request.body.gallery];
 
   return client.query(SQL, values)
@@ -243,7 +240,9 @@ function createGallery(request, response) {
 
 function manageGalleries(request, response) {
   getGalleries().then(galleries => {
-    response.render('pages/galleries', {galleries: galleries.rows});
+    response.render('pages/galleries', {
+      galleries: galleries.rows
+    });
   })
 }
 
