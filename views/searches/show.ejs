@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ../layouts/head %>
+  <title>Search Results</title>
+</head>
+
+<body>
+  <%- include ../layouts/header %>
+  <main>
+    <h4>Search Results</h4>
+    <section>
+      <ul>
+        <% works.forEach(work => { %>
+        <li id="results-li" class="work-section">
+          <img src="<%= work.image_url ? work.image_url : 'assets/placeholder.jpg'%>">
+          <h3><%= work.title %></h3>
+          <p><%= work.artist %></p>
+
+          <form action="/works" method="POST">
+            <input type="hidden" name="title" id="title" value="<%= work.title %>">
+            <input type="hidden" name="artist" id="artist" value="<%= work.artist %>">
+            <input type="hidden" name="century" id="century" value="<%= work.century %>">
+            <input type="hidden" name="image_url" id="image_url" value="<%= work.image_url %>">
+            <select name="gallery" id="gallery" required>
+              <option value="">Choose gallery</option>
+              <% galleries.forEach(gallery => { %>
+              <option value="<%= gallery.name %>"><%= gallery.name %></option>
+              <%})%>
+            </select>
+            <button type="submit">Save to Gallery</button>
+          </form>
+        </li>
+        <%})%>
+      </ul>
+    </section>
+  </main>
+  <%- include ../layouts/footer %>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="/js/app.js"></script>
+
+<%- include ../layouts/scripts %>
+
+</html>

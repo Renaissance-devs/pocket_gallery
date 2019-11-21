@@ -1,14 +1,47 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <%- include('../layouts/head') %>
+  <title>My Gallery</title>
 </head>
 
 <body>
-  <p>Hello World!</p>
+  <%- include('../layouts/header') %>
+  
+  <main>
+    <h4><%= count %> Saved Works &mdash; <a id="h4-a" href="/searches">Add to Your Gallery <i
+          class="fas fa-search"></i></a></h4>
+    <section class="subhead">
+      <form id="index-form" action="/gallery" method="POST">
+        <select id="gallery-select" name="gallery">
+          <option value="all">All Galleries</option>
+          <% galleries.forEach(gallery => { %>
+          <option value="<%= gallery.name %>"><%= gallery.name %></option>
+          <%})%>
+        </select>
+        <button type="submit">View Gallery</button>
+      </form>
+      <button onclick="window.location.href = '/galleries'">Manage Galleries</button>
+    </section>
+
+    <ul>
+      <% result.forEach(art => { %>
+      <li class="art-items" data-work-id="<%= art.id %>">
+        <section class="work-section">
+          <img class="frame" src="<%= art.image_url ? art.image_url : 'assets/placeholder.jpg' %>"
+            alt="image of painting">
+          <h3><%= art.title %></h3>
+          <p><%= art.artist %></p>
+          <p>gallery > <%= art.name %></p>
+          <button onclick="window.location.href = '/works/<%= art.id %>'">View Details</button>
+        </section>
+      </li>
+      <% }) %>
+    </ul>
+  </main>
+  <%- include('../layouts/footer') %>
 </body>
+<%- include ../layouts/scripts %>
 
 </html>

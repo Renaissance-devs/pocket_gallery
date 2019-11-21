@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ../layouts/head %>
+  <title>No Search Results</title>
+</head>
+
+<%- include('../layouts/header') %>
+<body>
+  <h4>There are 0 results for that search. <br><br>Please try a different keyword.</h4>
+  <section>
+    <form action="/searches" method="GET">
+      <button type="submit">Search Again</button>
+    </form>
+  </section>
+  <%- include ../layouts/footer %>
+</body>
+<%- include ../layouts/scripts %>
+</html>

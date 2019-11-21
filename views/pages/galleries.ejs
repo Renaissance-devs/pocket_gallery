@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../layouts/head') %>
+  <title>Error</title>
+</head>
+
+<body>
+  <%- include('../layouts/header') %>
+  <main>
+    <h4>Gallery Manager</h4>
+
+    <form action="/gallery" method="POST">
+      <h3>Create a new Gallery</h3>
+      <label for="gallery">New Gallery Name</label>
+      <input type="hidden" name="_method" value="PUT">
+      <input type="text" name="gallery" id="gallery">
+      <button type="submit">Create</button>
+    </form>
+
+    <form action="/gallery" method="POST">
+      <h3>Delete a Gallery</h3>
+      <br>
+      <input type="hidden" name="_method" value="delete">
+      <select name="gallery" id="gallery">
+        <option value="all">Choose gallery</option>
+        <% galleries.forEach(gallery => { %>
+        <option value="<%= gallery.name %>"><%= gallery.name %></option>
+        <%})%>
+      </select>
+      <button type="submit">Delete</button>
+    </form>
+  </main>
+  <%- include('../layouts/footer') %>
+</body>
+<%- include ../layouts/scripts %>
+
+</html>

@@ -1,0 +1,136 @@
+body {
+  text-align: center;
+  font-family: 'Comfortaa', cursive;
+}
+
+h1 {
+  color: #e5e6e4;
+  font-size: 3em;
+  font-family: 'Sofia', cursive;
+  font-weight: normal;
+}
+
+#pocket {
+  font-family: 'Comfortaa', cursive;
+  font-size: 2.5em;
+}
+
+p {
+  width: 90%;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  font-weight: bolder;
+  transition: color 0.3s ease;
+}
+
+#details-a {
+  color: black;
+}
+
+section {
+  margin: 40px;
+}
+
+header {
+  background: #847577;
+  padding: 30px;
+  padding-top: 0px;
+}
+
+#hide-me input, #hide-me textarea {
+  display: none;
+}
+
+.hide-me {
+  display: none;
+}
+
+footer {
+  background: #847577;
+  color: white;
+  padding: 30px;
+  line-height: 1.8em;
+}
+
+#error-p {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+#scream {
+  margin: 30px 0px;
+  width: 90%;
+}
+
+#error-a {
+  color: black;
+}
+
+.subhead {
+  margin: 15px;
+  line-height: 2em;
+}
+
+.work-section {
+  line-height: 2em;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #d1ab90;
+  font-size: .8em;
+  font-family: 'Comfortaa', cursive;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #847577;
+  color: white;
+}
+
+h3 {
+  font-style: italic;
+  width: 90%;
+  margin: 0 auto;
+}
+
+h4 {
+  background: #cfd2cd;
+  padding: 15px;
+}
+
+#h4-a {
+  color: black;
+}
+
+.fas {
+  color: #847577;
+}
+
+#search-form {
+  margin-top: 30px;
+  line-height: 1.8em;
+}
+
+#form-search {
+  line-height: 2.5em;
+  margin: 30px;
+}
+
+form {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+#index-form {
+  margin-bottom: 5px;
+}
