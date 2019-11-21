@@ -2,6 +2,14 @@
 @import url("layouts/tablet.css") (min-width: 600px);
 @import url("layouts/desktop.css") (min-width: 1000px);
 
+.subhead {
+  margin: 15px;
+  line-height: 2em;
+}
+
+.work-section {
+  line-height: 2em;
+}
 
 #search-form {
   margin-top: 30px;
