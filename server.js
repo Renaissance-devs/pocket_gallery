@@ -73,6 +73,7 @@ app.get('/works/:id', getOneWork);
 app.put('/works/:id', updateWork);
 app.delete('/works/:id', deleteWork);
 app.get('/galleries', manageGalleries);
+app.get('/about', renderAbout);
 
 app.get('*', (request, response) => response.render('pages/error', {
   error: '404 Page Not Found'
@@ -247,6 +248,10 @@ function manageGalleries(request, response) {
   getGalleries().then(galleries => {
     response.render('pages/galleries', {galleries: galleries.rows});
   })
+}
+
+function renderAbout(request, response) {
+  response.render('pages/about');
 }
 
 function handleError(error, response) {
