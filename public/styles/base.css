@@ -44,7 +44,8 @@ header {
   padding-top: 0px;
 }
 
-#hide-me input, #hide-me textarea {
+#hide-me input,
+#hide-me textarea {
   display: none;
 }
 
@@ -114,23 +115,4 @@ h4 {
 
 .fas {
   color: #847577;
-}
-
-#search-form {
-  margin-top: 30px;
-  line-height: 1.8em;
-}
-
-#form-search {
-  line-height: 2.5em;
-  margin: 30px;
-}
-
-form {
-  margin-top: 15px;
-  margin-bottom: 30px;
-}
-
-#index-form {
-  margin-bottom: 5px;
 }

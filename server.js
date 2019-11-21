@@ -42,10 +42,7 @@ function Art(info, gallery) {
   this.gallery = gallery;
 }
 
-function Gallery(gallery) {
-  this.name = gallery.name;
 
-}
 
 
 // *********************************************************************
