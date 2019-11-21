@@ -2,6 +2,9 @@
 
 ---
 
+## Version
+11/21/2019 9:03am version 1.0.0
+
 ## Group Members
 
 - Holly Davis - https://github.com/hollydavis541
