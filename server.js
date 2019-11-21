@@ -165,6 +165,7 @@ function searchResults(request, response) {
   let url = `https://api.harvardartmuseums.org/object?${param}=${search}&classification=Paintings&apikey=${process.env.ART_API_KEY}`;
   superagent.get(url)
     .then(apiResponse => {
+      console.log(apiResponse);
       if (apiResponse.body.info.totalrecords === 0) {
         response.render('searches/noResults');
       } else {
