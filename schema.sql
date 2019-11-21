@@ -47,7 +47,7 @@ INSERT INTO works (artist, title, image_url, century, gallery_id)
 VALUES ('Alexander Pope', 'Skull', 'https://nrs.harvard.edu/urn-3:HUAM:770200', '19th-20th century', 5);
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
-VALUES ('Calvin Cheng', 'Bringer of Pain', '/assets/calvin.jpg', '21st century', 7);
+VALUES ('Calvin Cheng', 'Bringer of "The Pain"', '/assets/calvin.jpg', '21st century', 7);
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
 VALUES ('Nathaniel Pierce', 'Sudo Hot Sauce', '/assets/nate.jpg', '21st century', 7);

@@ -33,14 +33,12 @@ app.use(cors());
 
 
 function Art(info, gallery) {
-  const placeholderImage = './public/assets/placeholder.jpg';
-
+  const placeholderImage = '/assets/placeholder.jpg';
 
   this.artist = info.peoplecount > 0 ? info.people[0].name : 'artist unavailable';
   this.title = info.title || 'title unavailable';
-  this.image_url = info.images[0] ? info.images[0].baseimageurl : placeholderImage;
-
-  this.century = info.century || 'We don\'t have this information';
+  this.image_url = info.images[0].baseimageurl ? info.images[0].baseimageurl : placeholderImage;
+  this.century = info.century || 'century unavailable';
   this.gallery = gallery;
 }
 
