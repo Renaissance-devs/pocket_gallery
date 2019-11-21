@@ -22,20 +22,20 @@
         <input type="hidden" id="title" value="<%= work.title%>">
         <input type="hidden" id="artist" value="<%= work.artist%>">
         <input type="hidden" id="century" value="<%= work.century%>">
-        <select name="gallery" id="gallery" required>
+        <select name="gallery" required>
           <option selected>Choose gallery</option>
           <% galleries.forEach(gallery => { %>
           <option value="<%= gallery.name %>"><%= gallery.name %></option>
           <%})%>
         </select>
         <button
-          style="background-color:<%= colors[0] %>;<% if(parseInt(colors[0].indexOf(1)) < 7){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %> type="
+          style="background-color:<%= colors[0] %>;<% if(RegExp(/#[0-9]/).test(colors[0].slice(0,2)) === true){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %>" type="
           submit">Update Gallery</button>
       </form>
       <form action="/works/<%=work.id%>" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <button
-          style="background-color:<%= colors[1] %>;<% if(parseInt(colors[0].indexOf(1)) < 7){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %> onclick="
+          style="background-color:<%= colors[1] %>;<% if(RegExp(/#[0-9]/).test(colors[1].slice(0,2)) === true){ %>color: #ffffff; <% }else{ %> color: #000000; <% } %>" onclick="
           window.location.href='/'">Delete this Work</button>
     </form>
   </section>

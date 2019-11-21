@@ -1,3 +1,7 @@
 #nav-desktop {
   display: none;
 }
+
+.backgroundimage {
+  background-image: none;
+}

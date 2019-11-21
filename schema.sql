@@ -49,10 +49,10 @@ INSERT INTO works (artist, title, image_url, century, gallery_id)
 VALUES ('Alexander Pope', 'Skull', 'https://nrs.harvard.edu/urn-3:HUAM:770200', '19th-20th century', 5);
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
-VALUES ('Calvin Cheng', 'Bringer of "The Pain"', '/assets/calvin.jpg', '21st century', 7);
+VALUES ('Calvin Cheng', 'Bringer of "The Pain"', 'https://github.com/Renaissance-devs/pocket_gallery/blob/master/public/assets/calvin.jpg?raw=true', '21st century', 7);
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
-VALUES ('Nathaniel Pierce', 'Sudo Hot Sauce', '/assets/nate.jpg', '21st century', 7);
+VALUES ('Nathaniel Pierce', 'Sudo Hot Sauce', 'https://github.com/Renaissance-devs/pocket_gallery/blob/master/public/assets/nate.jpg?raw=true', '21st century', 7);
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
-VALUES ('Douglas Taylor', 'Bug Hunter', '/assets/doug.jpg', '21st century', 7);
+VALUES ('Douglas Taylor', 'Bug Hunter', 'https://github.com/Renaissance-devs/pocket_gallery/blob/master/public/assets/doug.jpg?raw=true', '21st century', 7);

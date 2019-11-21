@@ -14,7 +14,7 @@
       <ul>
         <% works.forEach(work => { %>
         <li id="results-li" class="work-section">
-          <img src="<%= work.image_url ? work.image_url : 'assets/placeholder.jpg'%>">
+          <img class="frame" src="<%= work.image_url ? work.image_url : 'assets/placeholder.jpg'%>">
           <h3><%= work.title %></h3>
           <p><%= work.artist %></p>
 
@@ -23,7 +23,7 @@
             <input type="hidden" name="artist" id="artist" value="<%= work.artist %>">
             <input type="hidden" name="century" id="century" value="<%= work.century %>">
             <input type="hidden" name="image_url" id="image_url" value="<%= work.image_url %>">
-            <select name="gallery" id="gallery" required>
+            <select name="gallery" required>
               <option value="">Choose gallery</option>
               <% galleries.forEach(gallery => { %>
               <option value="<%= gallery.name %>"><%= gallery.name %></option>

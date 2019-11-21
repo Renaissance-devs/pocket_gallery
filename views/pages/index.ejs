@@ -27,7 +27,7 @@
 
     <ul>
       <% result.forEach(art => { %>
-      <li class="art-items" data-work-id="<%= art.id %>">
+      <li data-work-id="<%= art.id %>">
         <section class="work-section">
           <img class="frame" src="<%= art.image_url ? art.image_url : 'assets/placeholder.jpg' %>"
             alt="image of painting">
