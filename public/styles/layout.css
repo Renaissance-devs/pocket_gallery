@@ -9,6 +9,9 @@
 
 .work-section {
   line-height: 2em;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 30px;
 }
 
 #search-form {

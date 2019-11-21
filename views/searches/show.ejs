@@ -14,7 +14,7 @@
       <ul>
         <% works.forEach(work => { %>
         <li id="results-li" class="work-section">
-          <img src="<%= work.image_url ? work.image_url : 'assets/placeholder.jpg'%>">
+          <img class="frame" src="<%= work.image_url ? work.image_url : 'assets/placeholder.jpg'%>">
           <h3><%= work.title %></h3>
           <p><%= work.artist %></p>
 
