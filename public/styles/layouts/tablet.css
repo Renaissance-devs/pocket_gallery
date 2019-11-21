@@ -1,3 +1,22 @@
+#menuToggle {
+  visibility: hidden;
+}
+
+header {
+  padding: 5px;
+}
+
+#nav-desktop {
+  display: unset;
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+
+#nav-desktop li {
+  margin-top: 10px;
+  padding: 15px;
+}
+
 ul {
   display: flex;
   flex-flow: row wrap;
@@ -10,4 +29,9 @@ li {
 
 #img-detail {
   width: 70%;
+}
+
+.work-section {
+  padding: 2%;
+  width: 45%;
 }
