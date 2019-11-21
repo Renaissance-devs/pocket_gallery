@@ -32,13 +32,3 @@ li {
   width: 45%;
 }
 
-#about-div {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  text-align: center;
-}
-
-.li-about {
-  width: 25%;
-}

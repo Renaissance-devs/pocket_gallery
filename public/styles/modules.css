@@ -166,3 +166,9 @@ select option {
 }
 
 /* END DROP-DOWN MENUS */
+
+.social-media {
+  width: 30px;
+  border: none;
+  padding: 8px;
+}
