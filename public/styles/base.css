@@ -109,9 +109,13 @@ h4 {
 }
 
 #pocket {
-  letter-spacking: 0.1em;
+  letter-spacing: 0.05em;
 }
 
 #gallery {
-  letter-spacing: 0.1em;
+  font-size: 380%;
+}
+
+.li-about {
+  margin-top: 14%;
 }
