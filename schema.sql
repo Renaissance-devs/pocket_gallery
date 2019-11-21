@@ -29,10 +29,12 @@ INSERT INTO works (artist, title, image_url, century, gallery_id)
 VALUES ('Eugene Speicher', 'Landscape', 'https://nrs.harvard.edu/urn-3:HUAM:LEG259441', '19th-20th century', 1);
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
-VALUES ('Joseph Lindon Smith', 'Mountain Landscape', 'https://nrs.harvard.edu/urn-3:HUAM:INV006558_dynmc', '19th-20th century', 3);
+VALUES ('Joshua Johnson', 'Portrait of a Girl', 'https://nrs.harvard.edu/urn-3:HUAM:DDC104098_dynmc', '19th century', 2);
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
-VALUES ('Joshua Johnson', 'Portrait of a Girl', 'https://nrs.harvard.edu/urn-3:HUAM:DDC104098_dynmc', '19th century', 2);
+VALUES ('Joseph Lindon Smith', 'Mountain Landscape', 'https://nrs.harvard.edu/urn-3:HUAM:INV006558_dynmc', '19th-20th century', 3);
+
+
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
 VALUES ('Jakob Ochtervelt', 'Portrait of a Family', 'https://nrs.harvard.edu/urn-3:HUAM:30011_dynmc', '17th century', 4);

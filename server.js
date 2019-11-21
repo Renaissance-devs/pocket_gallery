@@ -15,7 +15,6 @@ const PORT = process.env.PORT || 3000;
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('err', err => console.error(err));
 
-
 app.use(
   express.urlencoded({
     extended: true
@@ -25,11 +24,11 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(cors());
 
-// *********************************************************************
+//*********************************************************************
 //
 //  DATA MODEL
 //
-//********************************************************************* */
+//**********************************************************************/
 
 
 function Art(info, gallery) {
@@ -44,15 +43,14 @@ function Art(info, gallery) {
 
 function Gallery(gallery) {
   this.name = gallery.name;
-
 }
 
 
-// *********************************************************************
+//*********************************************************************
 //
 //  ROUTES
 //
-//********************************************************************* */
+//**********************************************************************/
 
 app.use(methodOverride((request, response) => {
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
@@ -84,15 +82,14 @@ app.get('*', (request, response) => response.render('pages/error', {
 //
 //  ROUTE HANDLERS
 //
-//********************************************************************* */
+//**********************************************************************/
+
 function gallerySelect(request, response) {
   if (request.body.gallery === 'all') {
     response.redirect('/');
   }
-
-  let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE name=$1`;
+  let SQL = `SELECT works.artist, works.title, works.image_url, works.id, gallery.name FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE name=$1`;
   const values = [request.body.gallery];
-
   return client.query(SQL, values)
     .then(results => {
       getGalleries().then(galleries => response.render('pages/index', {
@@ -104,7 +101,7 @@ function gallerySelect(request, response) {
 }
 
 function getArt(request, response) {
-  let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id`;
+  let SQL = `SELECT works.artist, works.title, works.image_url, works.id, gallery.name FROM works JOIN gallery ON works.gallery_id=gallery.id`;
   return client.query(SQL)
     .then(results => {
       getGalleries().then(galleries => response.render('pages/index', {
@@ -118,7 +115,7 @@ function getArt(request, response) {
 
 function getOneWork(request, response) {
   getGalleries().then(galleries => {
-    let SQL = `SELECT * FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE works.id=$1`;
+    let SQL = `SELECT works.artist, works.title, works.image_url, works.id, gallery.name FROM works JOIN gallery ON works.gallery_id=gallery.id WHERE works.id=$1`;
     const values = [request.params.id];
     return client.query(SQL, values).then(results => {
       getColors(results.rows[0].image_url).then(colors => {
@@ -137,7 +134,6 @@ function deleteGallery(request, response) {
   const values = [request.body.gallery];
   client.query(SQL, values).then(() => response.redirect('/'));
 }
-
 
 function search(request, response) {
   response.render('searches/new')
@@ -179,7 +175,6 @@ function searchResults(request, response) {
         })
       }
     });
-
 }
 
 function getColors(image_url) {
@@ -189,7 +184,6 @@ function getColors(image_url) {
     .then(results => {
       let colorValues = []
       results.body.result.colors.image_colors.forEach(color => colorValues.push(color.closest_palette_color_html_code))
-
       return colorValues;
     })
     .catch(err => console.error(err));
@@ -222,7 +216,6 @@ function createWork(request, response) {
     century
   } = request.body;
 
-
   let SQLworks = 'INSERT INTO works(artist, title, image_url, century, gallery_id) VALUES ($1, $2, $3, $4, $5) RETURNING id;';
   let valuesWorks = [artist, title, image_url, century];
 
@@ -230,7 +223,6 @@ function createWork(request, response) {
   const valuesGallery = [request.body.gallery];
 
   client.query(SQLgallery, valuesGallery).then(galleryId => {
-
     valuesWorks.push(galleryId.rows[0].id);
     client.query(SQLworks, valuesWorks)
       .then(result => response.redirect(`/works/${result.rows[0].id}`))
@@ -246,7 +238,9 @@ function createGallery(request, response) {
 
 function manageGalleries(request, response) {
   getGalleries().then(galleries => {
-    response.render('pages/galleries', {galleries: galleries.rows});
+    response.render('pages/galleries', {
+      galleries: galleries.rows
+    });
   })
 }
 
@@ -259,25 +253,23 @@ function handleError(error, response) {
     error: error
   });
 }
-// *********************************************************************
+
+//*********************************************************************
 //
 //  HELPERS
 //
-//********************************************************************* */
+//**********************************************************************/
 
 function getGalleries() {
   const SQL = `SELECT name FROM gallery ORDER BY name`;
   return client.query(SQL);
 }
 
-
-
-// *********************************************************************
+//*********************************************************************
 //
 //  ENTRY POINT
 //
-//********************************************************************* */
-
+//**********************************************************************/
 
 client.connect()
   .then(() => {

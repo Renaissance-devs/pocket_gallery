@@ -1,3 +1,31 @@
 @import url("layouts/mobile.css");
 @import url("layouts/tablet.css") (min-width: 600px);
 @import url("layouts/desktop.css") (min-width: 1000px);
+
+.subhead {
+  margin: 15px;
+  line-height: 2em;
+}
+
+.work-section {
+  line-height: 2em;
+}
+
+#search-form {
+  margin-top: 30px;
+  line-height: 1.8em;
+}
+
+#form-search {
+  line-height: 2.5em;
+  margin: 30px;
+}
+
+form {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+#index-form {
+  margin-bottom: 5px;
+}
