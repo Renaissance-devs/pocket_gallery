@@ -182,6 +182,8 @@ function getColors(image_url) {
     .then(results => {
       let colorValues = []
       results.body.result.colors.image_colors.forEach(color => colorValues.push(color.closest_palette_color_html_code))
+      console.log(colorValues)
+      console.log(RegExp(/#[0-9]/).test(colorValues[0].slice(0,2)))
       return colorValues;
     })
     .catch(err => console.error(err));
