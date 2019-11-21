@@ -1,0 +1,3 @@
+@import url("layouts/mobile.css");
+@import url("layouts/tablet.css") (min-width: 600px);
+@import url("layouts/desktop.css") (min-width: 1000px);
