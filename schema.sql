@@ -18,10 +18,11 @@ CREATE TABLE works (
 
 INSERT INTO gallery (name) VALUES ('landscapes');
 INSERT INTO gallery (name) VALUES ('portraits');
-INSERT INTO gallery (name) VALUES ('mountain');
+INSERT INTO gallery (name) VALUES ('mountains');
 INSERT INTO gallery (name) VALUES ('life');
 INSERT INTO gallery (name) VALUES ('skull');
 INSERT INTO gallery (name) VALUES ('religious');
+INSERT INTO gallery (name) VALUES ('instructors');
 
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
@@ -43,4 +44,13 @@ INSERT INTO works (artist, title, image_url, century, gallery_id)
 VALUES ('Mary Cassatt', 'Woman on a Striped Sofa with a Dog', 'https://nrs.harvard.edu/urn-3:HUAM:DDC252719_dynmc', '19th century', 4);
 
 INSERT INTO works (artist, title, image_url, century, gallery_id)
-VALUES ('Alexander Pope', 'Skull', 'https://nrs.harvard.edu/urn-3:HUAM:770200', '19th-20th century century', 5);
+VALUES ('Alexander Pope', 'Skull', 'https://nrs.harvard.edu/urn-3:HUAM:770200', '19th-20th century', 5);
+
+INSERT INTO works (artist, title, image_url, century, gallery_id)
+VALUES ('Calvin Cheng', 'Bringer of Pain', '/assets/calvin.jpg', '21st century', 7);
+
+INSERT INTO works (artist, title, image_url, century, gallery_id)
+VALUES ('Nathaniel Pierce', 'Sudo Hot Sauce', '/assets/nate.jpg', '21st century', 7);
+
+INSERT INTO works (artist, title, image_url, century, gallery_id)
+VALUES ('Douglas Taylor', 'Bug Hunter', '/assets/doug.jpg', '21st century', 7);
