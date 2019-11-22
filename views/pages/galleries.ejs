@@ -3,7 +3,7 @@
 
 <head>
   <%- include('../layouts/head') %>
-  <title>Error</title>
+  <title>Gallery Manager</title>
 </head>
 
 <body>
@@ -13,9 +13,11 @@
 
     <form action="/gallery" method="POST">
       <h3>Create a new Gallery</h3>
+      <br>
       <label for="gallery">New Gallery Name</label>
       <input type="hidden" name="_method" value="PUT">
       <input type="text" name="gallery">
+      <br>
       <button type="submit">Create</button>
     </form>
 
