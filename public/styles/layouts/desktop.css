@@ -22,3 +22,14 @@ li {
   background-repeat: no-repeat;
   border-image-width: 100%;
 }
+
+#about-p {
+  background: white;
+  padding: 20px;
+  width: 300px;
+  box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+}
+
+.ul-about {
+  margin-top: 2%;
+}
