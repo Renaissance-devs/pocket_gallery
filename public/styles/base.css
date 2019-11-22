@@ -103,6 +103,8 @@ h4 {
 
 .backgroundimage h4 {
   background: none;
+  font-size: 1.8em;
+  padding-top: 7%;
 }
 
 #h4-a {
@@ -121,6 +123,6 @@ h4 {
   font-size: 380%;
 }
 
-.li-about {
+/* .li-about {
   margin-top: 12%;
-}
+} */
